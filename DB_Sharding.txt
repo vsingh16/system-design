@@ -1,0 +1,45 @@
+								Vertical Scaling:
+We increase the capacity of same db.
+eg: when DB face memory issue, we increase its disk space.
+								Pros: 
+1)Initial Machine Setup less expensive as we need to buy license for one machine.
+2)Inter process communication, so fast.
+3)Data Consistency: Since data on one machine, its easy to ensure data persistence.
+								cons:		
+1)After certain point, machine cost become high and even if u increase its capacity but data processing is not happening in ||,
+queries cant be improve.
+2)Single machine , no fault tolerance.
+3)Down time, if we are increasing disk space DB will be uanavilable.								
+
+
+Horizontal Scaling:
+Rather than increasing capacity of same db, we add more db.
+Now there are multiple strategies to distibute data across deiff servers.
+
+a)Horizontal Sharding: Range base data distribution.
+eg: year based
+DB1 : 1991-2000
+DB2 : 2001-2010
+DB3 : 2011-2020
+Problem: if range key is not choosen carefully, one of db will be overloaded.
+
+
+b)Vertical Sharding: Feature based(Microservices). eg: If instagram designing.
+DB1 : user profile
+DB2 : photos
+DB3 : friendlist
+Problem: one of the feature has lot of data,eg photos are more often uploaded, so we further need to distribute photo data
+may be further on range(year)
+
+c)Directory Based Partioning: Here we have a DB look up server, which will decide based on load where our request will go.
+More like load balancing gateway.
+
+d)Hashing Based: Less used, like hashmap. key hash%bucket
+
+								Pros: 
+1)Fault Tolerance.
+2)Scalable.
+3)Queries can be faster if data is well distribited.
+								cons:		
+1)Initial cost setup may be high.
+2)Netwrok communication REST CALLS.
