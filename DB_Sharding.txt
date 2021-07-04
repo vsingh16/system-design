@@ -40,6 +40,8 @@ d)Hashing Based: Less used, like hashmap. key hash%bucket
 1)Fault Tolerance.
 2)Scalable.
 3)Queries can be faster if data is well distribited.
+
 								cons:		
 1)Initial cost setup may be high.
 2)Netwrok communication REST CALLS.
+3)If we join data across two dbs, cost is high
