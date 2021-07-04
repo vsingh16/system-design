@@ -1,0 +1,43 @@
+https://www.mongodb.com/scale/types-of-nosql-databases
+https://www.guru99.com/nosql-tutorial.html
+                                                               
+                                                               SQL VS NO SQL
+SQL or RDMS has fix schema. This become challenge with unstructred data processing and persistence.
+There we have to choose No SQL DB.
+eg:Oracle, Sybase, My SQL, MS SQL
+
+							                                                  Types of NO SQL DB
+							
+1)Key Value Pair: 
+Name -> Steve
+Age -> 23
+
+data:{
+  name : Steve,
+  age : 23
+  address:{
+	city: lko
+  }
+}
+eg: Only two columns will be there , one is key and other is value.
+eg: Redis, Dynamo DB(AWS)
+
+Note that data is stored in key and value form.
+Value itself can contain, keys.
+
+2)Document Base DB: Data is stored in JSON, BSON and XML.
+Article, Author
+List<Subscribers>
+
+articles:{
+	author: "",
+	replies: {}
+}
+
+Note: its not necessary that other article has replies. 
+eg: MONGO DB, Postgress
+
+3)Graph Based: It is used when data is more connected. Node is entities and edges represent relationship bw them.
+It saves querying of joining multiple tables.
+Social Networks.
+eg: Neo4j
