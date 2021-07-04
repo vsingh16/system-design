@@ -1,0 +1,49 @@
+										                                         CAP Theorm
+For distributed data systems, we have CAP theorm.
+										
+1)Consistency(C): 
+Consistency means that data is the same across the cluster, 
+so you can read or write from/to any node and get the same data.										
+
+2)Availability(A):
+Availability means the ability to access the cluster even if a node in the cluster goes down.
+
+3)Partition Tolerance(P):
+Partition tolerance means that the cluster continues to function even if there is a "partition"
+(communication break) between two nodes (both nodes are up, but can't communicate).
+
+In order to get both availability and partition tolerance, you have to give up consistency. 
+Consider if you have two nodes, X and Y, in a master-master setup. 
+Now, there is a break between network communication between X and Y, so they can't sync updates. At this point you can either:
+
+A) Allow the nodes to get out of sync (giving up consistency), or
+
+B) Consider the cluster to be "down" (giving up availability)
+
+All the combinations available are:
+
+CA - data is consistent between all nodes - as long as all nodes are online - and you can read/write from any node and be sure that the data is the same, but if you ever develop a partition between nodes, the data will be out of sync (and won't re-sync once the partition is resolved).
+CP - data is consistent between all nodes, and maintains partition tolerance (preventing data desync) by becoming unavailable when a node goes down.
+AP - nodes remain online even if they can't communicate with each other and will resync data once the partition is resolved, but you aren't guaranteed that all nodes will have the same data (either during or after the partition)
+You should note that CA systems don't practically exist (even if some systems claim to be so).
+================================================================================================================================================================================
+								Data Distributed Systems
+DB1 : Request/Response are coming through only DB1.
+Now when load goes increasing, we add one more DB2.
+
+DB1 <-> DB2
+
+So now request/resposne are going thorugh both DB1 and DB2.								
+Both DB instances are sharing their updates over network.
+
+So far, we have consistency and availablity.
+
+Scenario 1: if DB2 goes down, so DB1 will respond to all requests.
+and when DB2 comes up, before DB2 takes any requests, it takes updates from DB1.
+i.e consistencey and availablity both are maintained.
+
+Scenario 2: if partition failure i.e(network failure happens), now in such case we can have either availablity or consistency.
+
+a)if we keep on responding to request in such case, then other nodes will not be consistent. i.e Available but not consistent.
+b)if we choose consistency, then we will not respond, i.e consistency but not availablity.
+	
