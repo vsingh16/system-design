@@ -5,12 +5,20 @@ https://www.guru99.com/nosql-tutorial.html
 SQL or RDMS has fix schema. This become challenge with unstructred data processing and persistence.
 There we have to choose No SQL DB.
 eg:Oracle, Sybase, My SQL, MS SQL
+PROS: select query is faster than NO SQL
+Cons: Schema modification is difficult.
 
-							                                                  Types of NO SQL DB
-							
+					                      Types of NO SQL DB
+
+PROS: Schema modification is easy.
+Cons: insert/delete query is faster.
+
+
 1)Key Value Pair: 
-Name -> Steve
-Age -> 23
+
+key -> values
+Name: age, city
+Steve : 23 , lko
 
 data:{
   name : Steve,
@@ -41,3 +49,15 @@ eg: MONGO DB, Postgress
 It saves querying of joining multiple tables.
 Social Networks.
 eg: Neo4j
+
+4)Column Based: Unlike traditional RDBMS where data is stored in row, data is stored in column.
+So rather than scaninng all rows , we will scan only one row
+eg: Casandra
+RDBMS emp table : id, name, salary
+id : all ids
+name : all name
+Salary: all salary
+Col Based id table : having all ids
+Name Table: Having all names
+Salary: Having all salary
+So if someone asks name and salary, so we can perform operation directly on name row to get all rows and then its corrseponding salary data.
