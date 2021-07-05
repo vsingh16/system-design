@@ -1,0 +1,23 @@
+								Client and Server Communication
+1)Http Communication:
+These are mostly like REST API calls where client initiate request and server respond. Synchronous
+
+2)Short Polling(AJAX):
+Client at certain frequncey keeps sending request to server and server respond. In this case most of the respose will be null
+as there will be no updates from server.
+Drawback is too much calls.								
+
+3)Long Polling:
+Client makes a request to server.Now server will not immediatelt respond but maintain listb of client connections and will respond
+on data availability. 
+Drawback is latency and since server can only send one respose , client again has to make request and same process repeats.
+
+4)Websockets:
+Client and server make TCP handshake and establish connection once.
+Now client can send data to server and server can send data to client.
+eg: wassup where we send messages to server and any new message from server reaches to us.
+Async Duplex communcation
+
+5)Server Side Events:
+Client initially makes request and then server will keep sending updates to clients.
+eg: google map location update or uber driver location update.
