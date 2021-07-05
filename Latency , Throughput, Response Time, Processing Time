@@ -1,0 +1,22 @@
+						Latency , Throughput, Response Time, Processing Time
+client ->(T1)Server(processing : T2)
+client(T3)<-Server(processing : T2) 						
+
+T1: time for request from client to Server
+T2: time taken by server to process request
+T3: Time taken by server to respond
+
+Latency : It is over network. T1+ T3 = Time for request/response over network
+How to improve Latency:
+1) CDN : Content Delivery Network. Request goes to geographically located server.
+2) Browser Caching: static data like images and some CSS can be cached at browser.
+3) Http2: with http2, client needs to create secure request TLS 1.2 and then multiple requets can be clubbed as stream 
+in one request.
+Http1: Sends only text request not encryupted and one request at a time.
+
+
+Throughput : no of request processed by server in a second.
+
+Response Time: T1+ T2 + T3. Time from request tiggered by clinet and response received.
+
+Processing Time: T2 Time taken by Server to process request.
