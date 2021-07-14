@@ -1,0 +1,21 @@
+Problme Statement: Design Facebook News feed.
+
+Step1: Clarify Requirements:
+a) Feeds wil be based on users followed.
+b) Feed can be text, image, video etc.
+c) Publish Feed to all followers when a user add Post.
+d) System should be scalable.
+
+                                                                  ERD:
+User(id, name, email, List<Integer> ids following, List<Integer> ids followers)
+Feed(id, format, S3Path, User Id)
+
+User Table : [id, name, email]
+Relationship Table: [id, Follower_id, Following_id] : This table can answer me both things
+who all a user is following.
+Who all are followers of a user.
+
+Feed Table: [id, format, S3Path, User Id]
+
+    
+
