@@ -17,5 +17,20 @@ Who all are followers of a user.
 
 Feed Table: [id, format, S3Path, User Id]
 
-    
+Flow 1 : When user login and requests for feeds.
+Feed Retrieval Service : This will accept user id and returns all the feeds for a user.
+Feed Generation Service: Which will query DB and fetches all feeds from his followings , compile and return.
+But since million of user data is there , making DB call and preparing this list on runtime will be slow, so we will Put a cache which will hold
+100 latest feeds for a user. This service will retrieve data from Cache and retrun.
+Cache can be LRU(LinkedHashMap)
+<User Id, List<Feed>>
+
+Communication B/w FRS and FGS is pull and push. This is like websocket communication where initial connection on login is establish by TLS handshake.
+and now 2 way communication is possible.
+Pull: when user login. FRS will pull data from FGS.
+Push: FGS will send updates whenever feed list for that user is updated.
+
+Flow2: When a user add a new post.
+Feed will be stored in DB and cache is also updated.
+
 
