@@ -36,6 +36,29 @@ If not duplicate url send to FRONtier---------------------------------(Crawled U
  6)URL Extractor: This will get web page from cache, extracts URLs . Now apply normalization on URL. i.e some URL clean up eg : http://abc.com and https://abc.com?a=b
  are same
  7)URL Filtering: This can filter a URL based on domain eg: we can filter all websites from .com
- Secondly, it can
+ Secondly, it can do robot exclusion. 
+ Robot Exclusion: websites can maintain robot.txt at top level of webpage hierarchy and list what all URLS are not allowed to visit by a robot.
+ 8)URL Dedup: Now we will check if we have already visited/crawled this URL. If so, we wont send it to URL FRONTIER else send. We can maintain a set of URLS.
+In case of continous cralwing , same page may be crawled , in that case we will always add it to URL Frontier but its priority may get change.
+
+----------------------------------------------------------------URL Frontier-----------------------------------------
+
+This is the main component which is giving us URL.
+There are two considerations:
+a)Priority: i.e we should be able to set priority of URLS.
+b)Politeness: same domain requests should not hit back to back as it may down web server.
+
+1)Priortizer: This assign priortiy to a URL and based on its priority send it to one of Front queue.
+2)Front Queues: There are 1 to n queues. Each queue has certain priority value assigned.
+3)Biased Front Queue Selector: When back queues request for a URL, it picks URL from highest priority non empty queue.
+4)Back queue: These queus are mapped with domais i.e same domain urls are sent to same queue. And this assginment of queue-domain keeps on changing when certain domain URLS 
+are finished, then this queue may assing to some other domain.
+5)Back queue selctor: This pick URL from a domian queue and send it to min heap.
+6)Min Heap: This maintains heap of back queues. so suppose at 1PM, Back queue1 of min heap is returned, then after its processing is completed by 1:15, this will be added
+back to min heap.
+
+
+
+ 
                                       
                                       
