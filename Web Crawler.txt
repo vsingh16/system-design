@@ -1,0 +1,41 @@
+Web Crawler: This is a kind of robot which crawls/processes web pages and the links on it.
+The result set of web crawlers are used by search engines and different comparing sites(Price comparing sites) to render results.
+
+Links Referred: https://medium.com/double-pointer/top-5-videos-for-web-crawler-system-design-interview-75b7ac9c04ce
+https://www.youtube.com/watch?v=BKZxZwUgL3Y
+https://www.youtube.com/watch?v=B994RSzlCww
+
+                                                      Features
+1)Crawling Frequency : This is the rate at which a web page should be visited. We can also set proiority of web pages i.e which web page should be often crawled.
+2)Dedup : We need to avoid visting dupliacte urls.
+3)Capacity: Each page that is crawled will carry several URLs to index. Assume an estimate of around 50 billion pages. Assuming an average page size of 100kb:
+50 B x 100 KBytes = 5 petabytes
+You would need around 5 petabytes of storage, give or take 2 petabytes, to hold the information on the web.
+
+                                                    Design Diagram
+URL Frontier(Seed Urls)-----URL----->Fetcher------Request to get IP-----> DNS
+                                       |
+                                       |
+                                      Website---->Cache(will cache website content)-------------------------------
+                                                    ^                                                            |
+                                                    |                                                            |
+                                                    |                                                            |
+                                                    |                                                            |
+If not duplicate url send to FRONtier---------------------------------(Crawled URL Set)URL DEDUP<----URL Filter<---URL Extractor             Content Seen----------(DB which will hold docs checksum)
+                                                                                                                                                  |
+                                                                                                                                                  |
+                                                                                                                                            Storage(S3/HDFS)
+                                      
+ 1)Seed URLS: These are initial urls on which web crawler will start cralwing. eg: for a flight comparison site, I can initally add some travel site urls.
+ 2)URL Frontier: This component provide a url to crawl to URL fetcher.
+ 3)URL Fetcher: It requests a URL form URL Frontier and after that it sends requets to DNS to get IP and then make call to web server and render its content.
+ 4)This content is cached (Redis) for some time, so that other processing components like URL Extractor and Content Seen can get data form it in less time.
+ Since in Persistent storage there will be large volume fo data and query will slow.
+ 5)Content Seen Module : It will get web page from cache , process it and checks if the checksum of web page is alreay there in db, discard its processing.
+ Else saves in DB. S3/HDFS. Data from this will be used by website/ search engine.
+ 6)URL Extractor: This will get web page from cache, extracts URLs . Now apply normalization on URL. i.e some URL clean up eg : http://abc.com and https://abc.com?a=b
+ are same
+ 7)URL Filtering: This can filter a URL based on domain eg: we can filter all websites from .com
+ Secondly, it can
+                                      
+                                      
