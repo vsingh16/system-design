@@ -57,7 +57,11 @@ are finished, then this queue may assing to some other domain.
 6)Min Heap: This maintains heap of back queues. so suppose at 1PM, Back queue1 of min heap is returned, then after its processing is completed by 1:15, this will be added
 back to min heap.
 
-
+*************************************************************Scaling************************************************
+1) In case of scaling, we can increase the no of content seen and URL extractor processor.
+2) We can implement caching at DNS resolver as resolving an DN to IP usually takes times.
+3) All URL fetchers can have their own DNS resolver.
+4)We can also have a host splitter which will based on domain(geography), send it to individual URL Frontier.
 
  
                                       
