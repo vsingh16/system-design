@@ -16,11 +16,11 @@ You would need around 5 petabytes of storage, give or take 2 petabytes, to hold 
 URL Frontier(Seed Urls)-----URL----->Fetcher------Request to get IP-----> DNS
                                        |
                                        |
-                                      Website---->Cache(will cache website content)-------------------------------
-                                                    ^                                                            |
-                                                    |                                                            |
-                                                    |                                                            |
-                                                    |                                                            |
+                                      Website---->Cache(will cache website content)-------------------------------------------------------------
+                                                    ^                                                            |                              |
+                                                    |                                                            |                              |
+                                                    |                                                            |                              |
+                                                    |                                                            |                              |
 If not duplicate url send to FRONtier---------------------------------(Crawled URL Set)URL DEDUP<----URL Filter<---URL Extractor             Content Seen----------(DB which will hold docs checksum)
                                                                                                                                                   |
                                                                                                                                                   |
