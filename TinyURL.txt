@@ -18,3 +18,16 @@ Tiny URL Generation:
 Tiny URL will consist of (a-z,A-Z,0-9). 62 characters, 7^62 combinations.
 i.e our service can service 7^62 unique tiny URLs.
 Approach 1: We can generate random no and then apply Base 62 i.e no%62 and n = n/62 (in this way we will get a no b/w 0-61 which we can map to characters(a-z,A-Z,0-9))
+ 
+ User----> TINY URL Generation Service---> DB
+ 
+ Case1: If two users hits tiny url creation at same time, 
+ REQ1(Long URL), -> random 1 -> tiny URL 1 
+ REQ2(Same Long URL), -> random 2 -> tiny URL 2
+ In this case , two entries will be made in db . This is fine but we see that multiple tiny urls may get allocated to long URL, duplicacy.
+ 
+ Case2: If two users hits tiny url creation at same time, 
+ REQ1(Long URL 1), -> Same random  -> tiny URL 
+ REQ2(Long URL 2), -> Same random  -> same tiny URL 
+ In this case , since we have Primary key in table on tiny url, one request will be succeed and 2 will fail.
+ To address this, we can apply retrey that 2nd req will again generate random and repeat the process until it gets unique URL.
