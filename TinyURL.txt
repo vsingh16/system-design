@@ -31,3 +31,24 @@ Approach 1: We can generate random no and then apply Base 62 i.e no%62 and n = n
  REQ2(Long URL 2), -> Same random  -> same tiny URL 
  In this case , since we have Primary key in table on tiny url, one request will be succeed and 2 will fail.
  To address this, we can apply retrey that 2nd req will again generate random and repeat the process until it gets unique URL.
+ Con: So many repative cycle.
+ 
+ Approach 2: 
+Rather than using random number, we will use MD5 to generate unqiue hash and will take its left 43 bits and apply base 62.
+Left 43 bits because we need only 7 len tiny url 43 bits = 7^62
+Point to note that MD5 will give unique same string for same input.
+Case1: If two users hits tiny url creation at same time, 
+
+REQ1(Long URL), -> same MD5 -> tiny URL  
+REQ2(Same Long URL), -> same MD5 -> same tiny URL 
+In this case , since we have Primary key in table on tiny url, one request will be succeed and 2 will fail and we no longer need to retry.
+
+ Case2: If two users hits tiny url creation at same time, 
+ REQ1(Long URL 1), -> MD5  -> tiny URL 
+ REQ2(Long URL 2), -> MD5(But since we consider only left 43 bits, it may be same)  -> same tiny URL 
+ In this case , since we have Primary key in table on tiny url, one request will be succeed and 2 will fail.
+ and we have to retry until it succeeds.
+ 
+ Approach3: 
+ We take counter staring from 0 to 7^62
+ 
