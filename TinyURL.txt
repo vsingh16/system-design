@@ -50,5 +50,34 @@ In this case , since we have Primary key in table on tiny url, one request will 
  and we have to retry until it succeeds.
  
  Approach3: 
- We take counter staring from 0 to 7^62
+ We take counter staring from 0 to 7^62.
+ user -> Load Balancer -----------> App1 
+                       -----------> App2
+Counter Service(0 to 7^62)--------> App3
+Case1: If two users hits tiny url creation at same time, 
+
+REQ1(Long URL), -> counter 1 -> tiny URL 1 
+REQ2(Same Long URL), -> Counter 2 -> tiny URL 2
+In this case , since we have Primary key in table on tiny url, one request will be succeed and 2 will fail and we no longer need to retry.
+
+ Case2: If two users hits tiny url creation at same time, 
+ REQ1(Long URL 1), -> counter 1 -> tiny URL 1
+ REQ2(Long URL 2), -> counter 2  -> tiny URL 2
+ Since counter service returns unique counter every time, no collision.
+ Con: SInce we have single counter service , its single poitn of failure.
+ 
+Approach 3: Distributed Tiny URl
+We can have zookeeper service, which will register all application service instances.
+And zookeeper can also store configs, it maintains ranges(0-10000,10001-2000) etc.
+               
+               Zookeeper(0-10000,10001-2000)----
+                                               |
+User 1 ------> Load Balancer----> App 1, App 2, APP3
+               |                    |cache----- DB(No SQL/RDDMS)
+user 2-------- |
+
+ 
+
+
+
  
