@@ -13,3 +13,8 @@ String getLongURL(String tinyURL)
 
 DB Schema:
 id,tiny URL(Primar Key), Long URL, Timestamp
+
+Tiny URL Generation:
+Tiny URL will consist of (a-z,A-Z,0-9). 62 characters, 7^62 combinations.
+i.e our service can service 7^62 unique tiny URLs.
+Approach 1: We can generate random no and then apply Base 62 i.e no%62 and n = n/62 (in this way we will get a no b/w 0-61 which we can map to characters(a-z,A-Z,0-9))
