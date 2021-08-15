@@ -50,10 +50,10 @@ In this case , since we have Primary key in table on tiny url, one request will 
  and we have to retry until it succeeds.
  
  Approach3: 
- We take counter staring from 0 to 7^62.
+ We take counter staring from 0 to 2^43.
  user -> Load Balancer -----------> App1 
                        -----------> App2
-Counter Service(0 to 7^62)--------> App3
+Counter Service(0 to 2^43)--------> App3
 Case1: If two users hits tiny url creation at same time, 
 
 REQ1(Long URL), -> counter 1 -> tiny URL 1 
