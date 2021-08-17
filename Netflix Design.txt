@@ -14,3 +14,22 @@ Endpoint Filter: Based on URL , it decides which microservice to invoke.
 Outbound Filter: Response Returning.
 
 Hystrix: Fault tolerance mechanism. For each end point, we can define a fallback path.
+
+Stateless End points: Not much dependencis on DB and other external dependencies.
+
+EV Cache : Distributed Caching
+
+DB: MySQL(Storing User and payment Info)
+Cassandra(Video metadata)
+S3: video content
+
+Old video metada is compressed and moved to cheap AWS storage. Db Archiving.
+
+ElasticSearch : send logs and otehr events to Elastic search which is later used to analyse errors and application behaviour.
+
+Recommendation: Data is also send to Spark jobs which process and apply machine learning algo to give recommendation.
+Collabrative Filtering: Based on pattern of group of users eg: user A watches movie B after A.
+Content Based: Same content typoe: eg comdy movies
+
+OCA (CDN): netflix own CDN deployed across globe in collaboration with ISP.
+Popular content is cached on OCA.
