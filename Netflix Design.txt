@@ -1,0 +1,13 @@
+Reference: https://www.youtube.com/watch?v=psQzyFfsUGU
+
+Netflix heavily uses AWS techonlogies.
+
+Client: Since it supports multiple client eg: phone, tablet, web app, so it has web app(react js), andriod app, ios app etc.
+
+Load Balancer: There are multiple level LB which distributes trafic across different worker nodes.
+
+Encoder: As mentioned in youtube design.txt
+
+ZUUL API Gateway: It has below components.
+Inboud Filter: Authenitication/Authorization is done.
+Endpoint Filter: Based on URL , it decides which microservice to invoke.
