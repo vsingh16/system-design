@@ -11,3 +11,6 @@ Encoder: As mentioned in youtube design.txt
 ZUUL API Gateway: It has below components.
 Inboud Filter: Authenitication/Authorization is done.
 Endpoint Filter: Based on URL , it decides which microservice to invoke.
+Outbound Filter: Response Returning.
+
+Hystrix: Fault tolerance mechanism. For each end point, we can define a fallback path.
