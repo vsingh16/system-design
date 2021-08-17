@@ -32,4 +32,5 @@ Collabrative Filtering: Based on pattern of group of users eg: user A watches mo
 Content Based: Same content typoe: eg comdy movies
 
 OCA (CDN): netflix own CDN deployed across globe in collaboration with ISP.
-Popular content is cached on OCA.
+Popular Global content is cached on OCA.
+Also content mostly viewed in ur area.
