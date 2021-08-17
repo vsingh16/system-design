@@ -9,3 +9,11 @@ API Design:
 Post: uploadVideo(video title, description, tags[], category id, default language, recording details, video content)
 Get: searchVideo(search_query, current page count, total page )
 Get: streamVideo(video id, codec, resolution) : codec and resoultion will be generated on the basis of client device.User can also select resolution supported by his device.
+
+Low Level Design:
+Client-----upload----------> WEb Server-----> APP Server(In case of upload, video content will be placed into queue.)---->queue------->Encoder--------> Save content in S3       
+      -----search------->                             |                                                                                       --------> Save Thumbnail in S3
+      -----streamVideo------->                        |  
+                                                      |
+                      (CDN )                          User DB, Metada DB    
+
