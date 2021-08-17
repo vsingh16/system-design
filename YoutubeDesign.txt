@@ -1,0 +1,11 @@
+Requirements:
+1) User should be able to upload video.
+2) User should be able to view video.
+3) User can perform search.
+4) User should be able to view/add comment on video.
+5) Video view/like/dislike counter.
+
+API Design:
+Post: uploadVideo(video title, description, tags[], category id, default language, recording details, video content)
+Get: searchVideo(search_query, current page count, total page )
+Get: streamVideo(video id, codec, resolution) : codec and resoultion will be generated on the basis of client device.User can also select resolution supported by his device.
