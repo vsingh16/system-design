@@ -1,0 +1,14 @@
+Requirement: Suggest/Recommend items to user
+
+Content Based Filtering:
+This is about an individual user.
+eg: User A watched a movie.
+Characterstics of movie (hindi, bollywood, Akshay Kumar, Katrnia Kaif, latest, Comedy)
+Next movie recommendation will be based on above characterstics.
+
+
+Collaborative Filtering:
+Here multiple users are considered.
+eg; User A : pizza, sandwich, noodles
+User B: Pizza, sandwich, ?
+Since User B has also liked pizza, sandwhich , we can recommend noodels to him.
