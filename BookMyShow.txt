@@ -18,3 +18,10 @@ Seat(id, number, price, category)
 SeatBooking(id, seat id, show id, Occupied Status)
 
 5 min Feature: Rather than directly updating seat status in DB, we can hold it in cache, if payment success write it in DB else evict from cache.
+
+                                                                  End To End Flow
+Reference Link : https://www.youtube.com/watch?v=lBAwJgoO3Ek
+In Real world scenario, theatres like PVR maintain their own APIS to manage seats.
+Systems like BMS invoke their APIS.
+
+Clients -> Load Balancer -> BMS App Server(Spring+Java) -> Cache -> RDMBS(Transaction Info : SQL), No SQL(Movie info, ratings, user comments)
