@@ -1,0 +1,11 @@
+Requirements:
+User select city, list all runnin shows
+User select show, list seats and their status
+User book seats, block them for 5 mins
+If payment fails, unblock seats.
+
+API:
+Get: list/shows/{city}
+Get: list/seats/{showid}
+POST: book/seats Request Body : [Lis of seatIds]
+                                                          
