@@ -1,5 +1,5 @@
 Requirements:
-User select city, list all runnin shows
+User select city, list all running shows
 User select show, list seats and their status
 User book seats, block them for 5 mins
 If payment fails, unblock seats.
@@ -8,4 +8,11 @@ API:
 Get: list/shows/{city}
 Get: list/seats/{showid}
 POST: book/seats Request Body : [Lis of seatIds]
-                                                          
+
+                                                                  DB Design
+User(id,name,mobile, email)     
+Show(id,movie id, theatre id, date time)
+Theatre(id, name, address, city)
+Movie(id,name)
+Seat(id, number, price, category)
+SeatBooking(id, seat id, show id, Occupied Status)
