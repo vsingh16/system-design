@@ -17,7 +17,7 @@ Movie(id,name)
 Seat(id, number, price, category)
 SeatBooking(id, seat id, show id, Occupied Status)
 
-5 min Feature: Rather than directly updating seat status in DB, we can hold it in cache, if payment success write it in DB else evict from cache.
+5 min Feature: Rather than directly updating seat status in DB, we can hold it in cache, if payment success write it in DB else evict from cache expiresAfterWrite=5mins.
 
                                                                   End To End Flow
 Reference Link : https://www.youtube.com/watch?v=lBAwJgoO3Ek
