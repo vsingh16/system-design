@@ -23,5 +23,11 @@ SeatBooking(id, seat id, show id, Occupied Status)
 Reference Link : https://www.youtube.com/watch?v=lBAwJgoO3Ek
 In Real world scenario, theatres like PVR maintain their own APIS to manage seats.
 Systems like BMS invoke their APIS.
-
+                              
+                              Logstash--> Elastic Search---> Kibana Dashboard
+                              | 
+                              |    
 Clients -> Load Balancer -> BMS App Server(Spring+Java) -> Cache -> RDMBS(Transaction Info : SQL), No SQL(Movie info, ratings, user comments)
+                              |             |         | -> After success payments queue ---> Send email and Whats app Service
+                              |             | 
+       Payment Gateway Services            Spark Jobs, Hadoop: ML recommendations
