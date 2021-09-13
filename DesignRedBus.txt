@@ -23,7 +23,7 @@ Bus(id, Opertor Id, date time, source, destination)
 Seat(id, Bus id, Seat Number, price, category)
 
 Booking Service: This service will save/update/delete booking details.
-Transaction(id, user id, seat booking info, amount, status,)
+Transaction(id, user id, seat booking info, transaction date time, amount, status)
 SeatBookingInfo(id, Bus id, Seat id)
 After payment success, ticket details will be send to queue which wil further send it to SMS/email etc.
 
