@@ -1,0 +1,16 @@
+Requirements:
+1)User can do registeration.
+2)User can serach all bus information.
+3)Operator can feed ticket booking info.
+4)Customer can perform booking.
+5)Our System notify for any updates.
+6)Management can validate analytics report.
+7)Offer details can share to users.
+
+
+Client(Mobile App/ Website) -> API Gateway -> User Registeration Service------> Redis cache ------>(No SQL) 
+                                           -> Inventory Service----> Redis Cache--->(No SQL) 
+                                           -> Booking Service (SQL DB)
+                                           -> Notification Service
+                                           -> Spark Jobs
+
