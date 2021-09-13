@@ -14,3 +14,21 @@ Client(Mobile App/ Website) -> API Gateway -> User Registeration Service------> 
                                            -> Notification Service
                                            -> Spark Jobs
 
+User Registeration Service : This service will save/update/delete user information.
+User(id, name, email, mobile)
+
+Inventory Service: This service will save/update/delete bus informations.
+Operator(id, name, email, mobile)
+Bus(id, Opertor Id, date time, source, destination)
+Seat(id, Bus id, Seat Number, price, category)
+
+Booking Service: This service will save/update/delete booking details.
+Transaction(id, user id, seat booking info, amount, status,)
+SeatBookingInfo(id, Bus id, Seat id)
+After payment success, ticket details will be send to queue which wil further send it to SMS/email etc.
+
+Notification Service: In case any change in time/bus , this service will notify all users.
+Notification event will be publish to a topic all connected consumers(Booking Service will share all users involved).
+
+Spark Jobs: All this data(SQL+ No Sql) flow to Spark jobs where transform and save data.
+Hive/ Impala is further used for data analytics.
