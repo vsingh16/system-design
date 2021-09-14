@@ -8,3 +8,11 @@ Customer should be see live location of driver.
 Driver should get requests for cab.
 Driver should see customer live location.
 
+Major requirement here is location tracking.
+Location = Longitude, Latitude
+The whole world is divded into quads and then further quads such that each quad will contain 500 locations.
+
+User ->Load Balancer----> User Service -------> Redis ---->(My SQL DB)
+User Service: This will take care of sign up/sign in information.
+All user related details will store in SQL tables.
+This may interact with other services like offer service, trip service to gatehe
