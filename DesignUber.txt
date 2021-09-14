@@ -1,0 +1,10 @@
+Ref Link:https://www.youtube.com/watch?v=umWABit-wbk
+https://www.youtube.com/watch?v=Tp8kpMe-ZKw
+
+Requirements:
+Customer should be sign up/sign in.
+Customer should be book a cab.
+Customer should be see live location of driver.
+Driver should get requests for cab.
+Driver should see customer live location.
+
