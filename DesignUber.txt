@@ -15,4 +15,46 @@ The whole world is divded into quads and then further quads such that each quad 
 User ->Load Balancer----> User Service -------> Redis ---->(My SQL DB)
 User Service: This will take care of sign up/sign in information.
 All user related details will store in SQL tables.
-This may interact with other services like offer service, trip service to gatehe
+This may interact with other services like offer service, trip service to gather info about user profile.
+
+Driver1---> LB--->Websocket Handler 1---> LB
+
+Driver2---> LB--->Websocket Handler 2---> LB      Web Socket Manager(Redis)
+
+Driver3---> LB--->Websocket Handler 3---> LB      Location Service(Redis cache)----------> Map Service(Segment Management)
+                                                   
+
+Driver will start their apps, Connection is established via websockets(async Duplex).
+Web socket manager will have redi cache which will keep information which driver is connected with which websocket handler.
+
+Driver will keep sending thier location update(their movement) to Location Service.(Driver id, Location id)
+Locstion Service will update map service.Segments update. Driver will keep sedning requests every seconds but we update map service in 1 min as updating map service is bit
+costly.
+
+Customer -> Cab Service Request---> Cab Finder---> Location Service---Map Service
+                                     |    -------------------------|
+                                    Driver Priority Manager       Trip Service(My SQL DB , Cassandra)
+                                                                  Trip Archival(Batch Job)
+Based on customer segment, location service will not only search in current segment but near by few segments(circular) also.
+Reason is driver in same segment may be far but driver in neighbour segment may be near to customer.
+Location service will return some drivers(10) list.
+Now Cab finder will pass driver list to driver prioerity manager to find out one driver which will serve thsi request.
+There can be multiple modes.
+Mode 1: Send request to all drivers.
+Mode 2: Send request to drivers considering their rating.
+Request will be broadcasted to drivers on their acceptance, confirmation is sent to customer.
+This was a trip is started by calling trip service.
+
+Trip Service: This will have active trip information.
+Since a trip can have many information driver, custmer,payment etc . info is saved in RDBMS.
+
+Trip Archival baatch job will run and move this information in cassandra which be later used to show last trips in user account.
+
+Recommendation: Spark jobs will run which will push data from all active DBS to HDFS.
+Later hive/impala anaytical tools are applied to fetch information out of it.
+eg: user profiling, driver rating/profiling.
+
+
+
+
+
