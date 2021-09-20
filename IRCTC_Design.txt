@@ -5,4 +5,18 @@ Requirements:
 4)User should book ticekt.
 5)There will be no seat bolcking at time of booking request. Seats will only be confirmed after payment success.
 
+                                                               DB Design
+User Table:(id, fname, lname, email, mobile, password)
+Generally we dont store passwords in DB. Authentication is manged by LDAP.
+
+Train Table(id, train number, train name, train category)
+train category eg: passenger, super fast, tejas etc.
+
+Train Route(id, train id, source, destination, depature date time, arrival date time, distance, Available seat caetgory A count, Availabe seat category B count)
+
+Train Seat Price(id, train categroy, seat category, price(/km))
+
+Booking(id, username, booking date time, travel date time, seat categoy, seat Number, total price, total distance)
+
+
 
