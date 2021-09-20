@@ -24,6 +24,33 @@ client(IRCTC website/ app) -> API Gateway -> user profile sign up -> User Servic
 
 Flow 2: User Sign in / Search For trains
 client(IRCTC website/ app) -> API Gateway -> sign in -> User Service
-If user service returns success
+If user service returns success, then
+client(IRCTC website/ app) -> API Gateway -> search -> Inventory Service
+Search will be based on source, destination, date
+
+Inventory DB: It will have train Table, train route, and train seat tables.
+select id from train route where source = 'i/p source' and date(depature date) = 'i/p date' : source route id
+select id from train route where destination = 'i/p destination' : destination route id
+select * from train route where id between source route id and destination route id : This will retrun me all rows b/w
+From this query , we can return train name in response.
+
+Flow 3: Client -> API Gateway -> Booking Service
+Check in train route table from row ids from above.
+Calculate total distance and fare.
+For fare, refer Train Seat Price : This will consider train category and seat price.
+Also if available seat A counts are > 0.
+
+Flow 4:Booking Service will send an event on queue to Payment service.
+If payment success, then this will send back an event to Inventory Service.
+Where it will update the seat count. This will reduce seat available count - booked seat count.
+
+Flow 5: After Booking service update and event will be send to notification service.
+Which will generarte tickets and send via sms/ email.
+
+
+
+
+
+
 
 
