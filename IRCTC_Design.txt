@@ -1,0 +1,8 @@
+Requirements:
+1)User should be able to create account.(Sign up/Sing In)
+2)User should be able to search for trains.(source, destination, date)
+3)Search should list available trains and available seats in different categories.
+4)User should book ticekt.
+5)There will be no seat bolcking at time of booking request. Seats will only be confirmed after payment success.
+
+
