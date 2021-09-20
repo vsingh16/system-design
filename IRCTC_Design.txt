@@ -43,6 +43,7 @@ Also if available seat A counts are > 0.
 Flow 4:Booking Service will send an event on queue to Payment service.
 If payment success, then this will send back an event to Inventory Service.
 Where it will update the seat count. This will reduce seat available count - booked seat count.
+This will also insert new rows in booking table.
 
 Flow 5: After Booking service update and event will be send to notification service.
 Which will generarte tickets and send via sms/ email.
