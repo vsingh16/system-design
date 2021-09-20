@@ -19,5 +19,11 @@ Train Seat Price(id, train categroy, seat category, price(/km))
 Booking(id, username, booking date time, travel date time, seat categoy, seat Number, total price, total distance)
 
                                                     LLD
-client(IRCTC website/ app) -> API Gateway -> user profile sign up -> User Service-> User DB(User Table)                                                   
+Flow 1: User Profile Creation
+client(IRCTC website/ app) -> API Gateway -> user profile sign up -> User Service-> User DB(User Table)    
+
+Flow 2: User Sign in / Search For trains
+client(IRCTC website/ app) -> API Gateway -> sign in -> User Service
+If user service returns success
+
 
