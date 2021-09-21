@@ -29,9 +29,14 @@ client(IRCTC website/ app) -> API Gateway -> search -> Inventory Service
 Search will be based on source, destination, date
 
 Inventory DB: It will have train Table, train route, and train seat tables.
-select id from train route where source = 'i/p source' and date(depature date) = 'i/p date' : source route id
-select id from train route where destination = 'i/p destination' : destination route id
-select * from train route where id between source route id and destination route id : This will retrun me all rows b/w
+select train id from train route where train id = (
+select train id from train route where source = 'i/p source'
+)
+and destination = 'i/p destination : This will give me train ids running b/w source & destination
+
+select sourceTrainRouteId from train route where train id = :trainId and source = 'i/p source' : source id
+select sourceTrainRouteId from train route where train id = :trainId and source = 'i/p destination' : destination id
+select * from train route where id between source id and destination id : This will retrun me all rows b/w
 From this query , we can return train name in response.
 
 Flow 3: Client -> API Gateway -> Booking Service
