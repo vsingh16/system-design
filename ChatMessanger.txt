@@ -1,3 +1,7 @@
+Reference: 
+https://www.youtube.com/watch?v=zKPNUMkwOJE
+https://www.youtube.com/watch?v=RjQjbJ2UJDg&t=1487s
+
 Requirements:
 1) 1-1 Converstaion
 2) Group Chat
@@ -29,4 +33,36 @@ Those undelivered messages will be sent to Client 2.
 Flow4: Client 1 send m1 to Client 2 and client 1 is offline.
 In this case messages are saved in lighter db in client device itself(SQL Lite).
 
+Flow5: Sent, Delivered, Read
+On messages transfer, acknowledgem will be send back to Source.
+Sent: When message reaches to Handler 1 and it finds destination hander and send to it.
+Delivered: When message reaches to client 2.
+Read: When client 2 read message and send ack back.
 
+Group Chat:
+Client 1 -> Load Balancer -> Web Socket Handler 1 -> Messaging Service 
+                                                  -> Group Chat Handler Service -> Group Service
+                                                  -> Send messages to all handlers of useres returned by group service.
+Client 1 sends m1 to Group1
+Same flow will happen that hanlder1 will save message in DB.
+Hanlder 1 will give this message to Goup Handler service which will further check with Group Service.
+Group Service has db and info about users in group and return user ids.
+Handler 1 will send messages to all user handlers.
+
+Image Upload:
+Client 1 will upload request to COntent Service.
+This will upload content to S3 and return an id.
+This id will send to destiantion
+On reaching destination, destination client will invoke content service to get content downloaded.
+
+User Service:
+We will also have a user service where we will save user related infomration.
+
+DB Design
+User(id, username, email, mobile)
+Conversation(id, from, to , text, date time)
+message status(conversation id, status)
+status: sent, delivered, read
+
+Last Seen:
+For last seen , each user will send its heartbeat(actiivity) and this info will updated in Redis cache(user id, connected hanlder, last seen)
