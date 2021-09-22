@@ -1,0 +1,32 @@
+Requirements:
+1) 1-1 Converstaion
+2) Group Chat
+3) Encrypted
+4) Media Sharing
+5) Last Seen
+6) Sent, Delivered, Read
+
+Client 1 -> Load Balancer -> Web Socket Handler 1 
+Client 2 -> Load Balancer -> Web Socket Handler 2
+Client 3 -> Load Balancer -> Web Socket Handler 3
+
+Flow1 : Client 1 comes online.
+Load balancer will connect it with one of Web socket handler.
+Each server will interact with Redis cache where it will maintain user id and web socket handler entry.
+
+Flow 2: Client 1 send m1 to Client 2 and both are online.
+CLient 1 will send this request to Web socket handler 1.
+We will also have a messaging service which will save messages and provide various APIs like unread messages etc.
+Handler 1 will persist message in Casandra DB.
+This handler will check redis cache to find out which handler for Client 2 from redis cache.
+And now this will make connection with Handler 2 and send message to it. Handler 2 will sent to Client 2.
+
+Flow 3: Client 1 send m1 to Client 2 and client 2 is offline.
+Same Flow2 will happen only difference is that messages are not sent to Client 3.
+But we have messages persisted in Db, hence when client 2 will come online , its handler will query messagin service to see any messages for it.
+Those undelivered messages will be sent to Client 2.
+
+Flow4: Client 1 send m1 to Client 2 and client 1 is offline.
+In this case messages are saved in lighter db in client device itself(SQL Lite).
+
+
