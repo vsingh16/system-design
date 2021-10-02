@@ -48,7 +48,21 @@ SPark jobs processing and storing infor in Hadoop.
 Recommendation Engine. This also used to save information about client devices , so that if there are two many devices associated 
 with a user, we can track account sharing.
 
-            
+Home Screen Flow:
+
+             
+Client -> Home Page API
+             ^
+             |
+           Analytics Service, Cassandra
+           
+Clinet -> Home SCreen -> Search(Cassandra)           
+
+The content of home screen is served by Home Screen API.
+Results are based on Analytics service and thumnbnails and video information we store in cassandra DB.
+
+Search results query over cache and cassandra db.
+           
             
             
 
