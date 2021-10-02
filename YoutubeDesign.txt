@@ -73,9 +73,6 @@ CDN(Content Delivery Network): This is set of servers placed across the globe , 
 Netflix and youtbue follow a model where they placed a cdn box at ISP end also, so that ISP can play video from CDN installed at their end only.
 This saves cost for ISP and netflix.
 
-
-Search Flow: Metadata DB will server this request. Thumbnails are returned in response.
-
 DB Schema:
 Video Table:
 (id, title, descrption, size, thumbnail, uploaded by user, likes, dislikes, total views)
