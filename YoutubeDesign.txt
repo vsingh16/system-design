@@ -62,14 +62,17 @@ The content of home screen is served by Home Screen API.
 Results are based on Analytics service and thumnbnails and video information we store in cassandra DB.
 
 Search results query over cache and cassandra db.
-This will also give us information about CDN where video is located.
-           
-            
-            
-
-
-Stream Flow: Request will go to near by CDN to fullfill video play request. 
+                                 
+Stream Flow:
+client -> LB -> Host Identifying Service -> Asset Service -> Cassandra DB-> CDN
+Client device will make video play request.
+Client metadta(client device, requested format, geographical location) info also goes in request.
+It will make call to host identityfying service which will find a local CDN for us. 
+CDN will serve request.
 CDN(Content Delivery Network): This is set of servers placed across the globe , so that communication cost(latency) b/w client and server can be reduced.
+Netflix and youtbue follow a model where they placed a cdn box at ISP end also, so that ISP can play video from CDN installed at their end only.
+This saves cost for ISP and netflix.
+
 
 Search Flow: Metadata DB will server this request. Thumbnails are returned in response.
 
