@@ -26,7 +26,7 @@ Content Processing Service<---------------------------------------------------|
                                                                               ^
 [File Chunker, Content Filtering, Tagging, Transcoding, CDN]------------------|
 
-Upload Flow: Client will invoke upload API call.
+Client will invoke upload API call.
 Asset onbaording service will save video in S3 and an event to kafka(Video uploaded. Content for processing)
 Content Processing Service will listen to this event and will start video processing.
 File Chunker: Video is very huge, so it is divided into smaller chunks.
@@ -35,6 +35,23 @@ Tagging: There may be multiple tags in videos, so top relevent tags are identifi
 Transcoding: Videos are converted into different formats and pxiels to serve multiple client devices.
 CDN: These smaller chunks are sent to CDN where it get uploaded.
 During all these process, different events are generated and sent to kafka, relevant microsevrice listening to these events will persist information in Cassandra DB.
+
+User Login Flow:
+            Kafka------------> Analytics Service---> Spark Jobs---> Hadoop Cluster
+               ^   
+               |   
+Client -> User Service -> MY SQL DB-> Redis cache
+User will login via User Service(LDAP).
+User Service will have user db, MYSQL, it will also cache some info in Redis.
+This will send lot of information related to user on kafka, where we have Analytics service listening.
+SPark jobs processing and storing infor in Hadoop.
+Recommendation Engine. This also used to save information about client devices , so that if there are two many devices associated 
+with a user, we can track account sharing.
+
+            
+            
+            
+
 
 Stream Flow: Request will go to near by CDN to fullfill video play request. 
 CDN(Content Delivery Network): This is set of servers placed across the globe , so that communication cost(latency) b/w client and server can be reduced.
