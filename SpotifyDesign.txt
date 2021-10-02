@@ -1,0 +1,77 @@
+Requirements:
+Its an online music player.
+Account Creation
+Subscription
+Track Upload
+Track Search
+Track Play
+Playlist Creation
+
+DB Schema:
+User(id, fname, lname, email, mobile,address)
+Packages(id, package name, cost, no of free adds per hour)
+Subscription(id, user id, package id, start date, end date)
+Track(id, track name, track url, uploaded by user id, singer)
+Playlist tracks
+(id, track id)
+Playlist User info(id, user id, playlist id)
+
+There will be two DBs
+User DB: User , Subscription table, Playlist User info
+Inventory DB: Packages, Track, Playlist tracks 
+
+1)Account Creation Flow:
+client -> LB -> User Service -> My SQL DB -> Redis
+
+2)Subscription:
+Client -> Inventory Service
+Client -> Payment Service-----Payment Success Event---> Kafka----> Account Update Service
+
+Client will check for available packages from Inventory Service
+Then he needs to do payment . He will inetract with payment service on payment confirmation ,account is updated.
+
+3)Track Upload:
+CLient ----->LB ------>Inventory OnBoarding Service------> S3(Raw Video)-----> Kafka----------> On Content Processing Completion-------> Cassandra DB
+                                                                              |
+Content Processing Service<---------------------------------------------------|
+                                                                              ^
+[File Chunker, Content Filtering, Tagging, Transcoding, CDN]------------------|
+
+Client will invoke upload API call.
+Asset onbaording service will save video in S3 and an event to kafka(Track uploaded. Content for processing)
+Content Processing Service will listen to this event and will start track processing.
+File Chunker: track is very huge, so it is divided into smaller chunks.
+Content Filtering:There may be some checks like piracy or nudity or absurd langauge.
+Tagging: There may be multiple tags in videos, so top relevent tags are identified and thumbnails are generadted.
+Transcoding: track are converted into different formats and pxiels to serve multiple client devices.
+CDN: These smaller chunks are sent to CDN where it get uploaded.
+During all these process, different events are generated and sent to kafka, relevant microsevrice listening to these events will persist information in Cassandra DB.
+
+Home Screen Flow:
+
+             
+Client -> Home Page API
+             ^
+             |
+           Analytics Service, Cassandra
+           
+Clinet -> Home SCreen -> Search(Cassandra)           
+
+The content of home screen is served by Home Screen API.
+Results are based on Analytics service and thumnbnails and video information we store in cassandra DB.
+
+Search results query over cache and cassandra db.
+
+Stream Flow:
+client -> LB -> Host Identifying Service -> Asset Service -> Cassandra DB-> CDN
+Client device will make video play request.
+Client metadta(client device, requested format, geographical location) info also goes in request.
+It will make call to host identityfying service which will find a local CDN for us. 
+CDN will serve request.
+CDN(Content Delivery Network): This is set of servers placed across the globe , so that communication cost(latency) b/w client and server can be reduced.
+Netflix and youtbue follow a model where they placed a cdn box at ISP end also, so that ISP can play video from CDN installed at their end only.
+This saves cost for ISP and netflix.
+
+Playlist Creation Flow:
+client ---------(track id, playlist id(new/update))------> User service 
+wil update this information in DB.
