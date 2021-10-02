@@ -5,6 +5,8 @@ Requirements:
 4) User should be able to view/add comment on video.
 5) Video view/like/dislike counter.
 
+Reference : https://www.youtube.com/watch?v=lYoSd2WCJTo
+
 API Design:
 Post: uploadVideo(video title, description, tags[], category id, default language, recording details, video content)
 Get: searchVideo(search_query, current page count, total page )
@@ -17,11 +19,22 @@ Client-----upload----------> WEb Server-----> APP Server(In case of upload, vide
                                                       |
                       (CDN )                          User DB, Metada DB    
 
-Upload Flow: Client will invoke upload API call. Request will be added to a queue. Then dequeue from queue. Encoder is responsible for processing video content to different format to support multiple client devices and their format. Video Content will be save in S3.
-Thumbnail is also generated for a video and stored in S3.
-There are two DbS.
-User DB: This will persist user info and their payment details.
-Metadata DB: Metadata DB will store video metadata information.
+Upload Flow:
+CLient ----->LB ------>Asset OnBoarding Service------> S3(Raw Video)-----> Kafka----------> On Content Processing Completion-------> Cassandra DB
+                                                                              |
+Content Processing Service<---------------------------------------------------|
+                                                                              ^
+[File Chunker, Content Filtering, Tagging, Transcoding, CDN]------------------|
+
+Upload Flow: Client will invoke upload API call.
+Asset onbaording service will save video in S3 and an event to kafka(Video uploaded. Content for processing)
+Content Processing Service will listen to this event and will start video processing.
+File Chunker: Video is very huge, so it is divided into smaller chunks.
+Content Filtering:There may be some checks like piracy or nudity or absurd langauge.
+Tagging: There may be multiple tags in videos, so top relevent tags are identified and thumbnails are generadted.
+Transcoding: Videos are converted into different formats and pxiels to serve multiple client devices.
+CDN: These smaller chunks are sent to CDN where it get uploaded.
+During all these process, different events are generated and sent to kafka, relevant microsevrice listening to these events will persist information in Cassandra DB.
 
 Stream Flow: Request will go to near by CDN to fullfill video play request. 
 CDN(Content Delivery Network): This is set of servers placed across the globe , so that communication cost(latency) b/w client and server can be reduced.
