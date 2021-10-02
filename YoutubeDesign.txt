@@ -62,6 +62,7 @@ The content of home screen is served by Home Screen API.
 Results are based on Analytics service and thumnbnails and video information we store in cassandra DB.
 
 Search results query over cache and cassandra db.
+This will also give us information about CDN where video is located.
            
             
             
