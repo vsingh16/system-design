@@ -1,0 +1,16 @@
+Ref Link: https://www.youtube.com/watch?v=wYk0xPP_P_8
+
+Functional Requirements:
+1) User should be able to tweet.
+2)Timeline Generation 
+    - Home Timeline : It should reflect tweets from following.
+    - User Timeline : It should reflect tweets of that user.
+    - Search : He should be able to search by hashtag and keywords.
+3)Trends : Calculate trending hashtags
+
+Non Functional Requirements: Read Heavy , Eventually COnsistent
+
+
+
+    
+
