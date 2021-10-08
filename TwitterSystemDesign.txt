@@ -18,7 +18,14 @@ Follow(id, follower user id, following user id)
 Redis:
 Redis cache is a distribited cache and it also persistent.
 It supports list/colletion data types.
+
+User id, user info
 User id, List of tweets
+Tweetd id, tweet content
+follower user id, following user id
+
+
+
 
 
 
