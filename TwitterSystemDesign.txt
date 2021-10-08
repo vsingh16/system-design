@@ -24,6 +24,50 @@ User id, List of tweets
 Tweetd id, tweet content
 follower user id, following user id
 
+User Timeline Generation: Show all tweets by user.
+Go to redis, find out list of tweets and then tweet content and display.
+
+Home Timeline Generation: Here we need to display tweets from users whom I am following.
+
+Naive Approach: Find all followers user id
+Find their tweets
+Merge and display.
+This can take huge time.
+
+Case 1: Normal User.
+Fan Out Approach:
+               DB Save 
+                |
+Normal User -> Tweet---------Fan out to all his followers--------------> Home Timeline Cache of user 1( tweet add)
+                                                         --------------> Home Timeline Cache of user 2( tweet add)
+                |
+             User Timeline Cache add 
+So now we can see , we have readymade Home timelines, and it can render fast from cache
+
+Case 2: Celebrity User: Since a celebrity can have million of followers, fan out may take long time.
+Here we follow opposite apporach.
+
+               DB Save 
+                |
+Celeb User -> Tweet
+                |
+             User Timeline Cache add 
+             
+There is a cache which is user id, List of celeb id             
+
+Now when a follower loads his timeline, it will lookup celeb cache , then go to celeb User time, find latest tweet if any, update Home Timeline cache.
+
+
+Trending Tweets:
+This is calcluated by Apache Storm.
+Everytime any user tweet, it goes to apache strom pipeline.
+
+User -> Filter -> Parser -> Geo location Tag -> Hashtag Count -> Rank -> Redis-> API
+
+Filter : Nudiity/ CopyRight Filter
+Parser: Finds out hashtag. If a tweet doesn't have hashtag, it generates one for it.
+Geo location Tag
+
 
 
 
