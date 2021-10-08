@@ -64,11 +64,22 @@ Everytime any user tweet, it goes to apache strom pipeline.
 
 User -> Filter -> Parser -> Geo location Tag -> Hashtag Count -> Rank -> Redis-> API
 
-Filter : Nudiity/ CopyRight Filter
+Filter: Nudiity/ CopyRight Filter
 Parser: Finds out hashtag. If a tweet doesn't have hashtag, it generates one for it.
 Geo location Tag
 
+Search: Lucene Search Engine is used.
+Where tweets are splitted into words and then idexing happens. We can use elastic search.
 
+               
+                  DB        Apache Sotrm
+                  |               |
+               Twitter Write -----------> Fan Out-----------> Redis               
+Client -> LB ------                                           |
+                  |                                           |
+                  |---Timeline Service -> Search Service------------|  
+                  |
+                 Web Socket 
 
 
 
