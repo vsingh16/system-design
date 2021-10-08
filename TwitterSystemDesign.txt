@@ -8,7 +8,18 @@ Functional Requirements:
     - Search : He should be able to search by hashtag and keywords.
 3)Trends : Calculate trending hashtags
 
-Non Functional Requirements: Read Heavy , Eventually COnsistent
+Non Functional Requirements: Read Heavy , Eventually Consistent
+
+DB Schema Design:
+User(id, fname, lname, email, mobile)
+Tweet(id, tweet content, date time, by user id)
+Follow(id, follower user id, following user id)
+
+Redis:
+Redis cache is a distribited cache and it also persistent.
+It supports list/colletion data types.
+User id, List of tweets
+
 
 
 
