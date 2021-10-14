@@ -62,6 +62,10 @@ List<Card> raiseHand(){
 return List.of(card1,card2);
 }
 
+int getScore(){
+return card1.gameValue+card2.gameValue;
+}
+
 }
 
 DealerHand extends Hand{
@@ -70,4 +74,13 @@ DealerHand extends Hand{
   }
 }
 
+Player{
+
+Hand hand;
+//return true if player wins
+boolean placeBet(){
+hand.getScore<
+
+}
+}
 
