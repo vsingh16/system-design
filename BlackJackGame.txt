@@ -75,12 +75,44 @@ DealerHand extends Hand{
 }
 
 Player{
-
 Hand hand;
-//return true if player wins
-boolean placeBet(){
-hand.getScore<
+PerosnalInfo;
+}
+
+Dealer{
+DelaerHande;
+PersonalInfo;
+}
+
+Game{
+Dealer dealer;
+Player player;
+Shoe shoe;
+
+Game(){
+this.player = new Player(new Hand());
+this.dealer = new Dealer(new Dealerhand());
+this.shoe = new Shoe();
+}
+
+boolean bet(){
+player.Hand.getScore() <= dealer.dealerHand.getScore();
+}
+
+void hit(){
+player.hand.addCard(shoe.getRandomCard())
+}
+
+booelan reolveBust(){
+retrun player.hand.getCore() > 21;
+}
+
+
+booelan dealerBust(){
+retrun dealer.hand.getCore() > 21;
+}
 
 }
-}
+
+
 
