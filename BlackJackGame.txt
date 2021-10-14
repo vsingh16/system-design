@@ -1,0 +1,15 @@
+1) There is a dealer.
+2) There is a player.
+3) Both dealer and player has hand.
+4) In hand they have two cards.
+5) Dealer's hand will show up one card and one hide.
+6) Player's hand will show up both cards.
+7) Player and dealer can take extra card from card shoe.
+8) Game value of A = 11, J,k,Q = 10
+9) If players hand is less or equal to 21 and more than dealer , he will win else vice versa.
+10) Dealer raise hand : one card visible other hide.
+11) Player raise hand : both card visible.
+12) Player place the bet.
+13) Hit: Player hands get an additional card.
+14) Resolve Bust: If player hand is over 21, player loose.
+15) Dealer Bust: If dealer hand is over 21, dealr loose.
