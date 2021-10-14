@@ -1,0 +1,29 @@
+1)A deck of cards will have multiple cards.
+2)There will be 4 rows.
+3)Each row has 13 cards.
+5)There are 4 categories : Club, Spade, Diamond, Heart
+6)Each card has some value.
+
+enum Suit{
+Club,
+Spade,
+Diamond,
+Heart
+}
+
+class Card{
+Suit suit;
+int faceValue;
+}
+
+class Deck{
+List<Card> cards;
+
+Deck(){
+for(Suit : suit){
+for(int i=1;i<=13;i++){
+cards.add(new Card(suit, faceValue));
+}
+}
+}
+}
