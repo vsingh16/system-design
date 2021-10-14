@@ -13,3 +13,39 @@
 13) Hit: Player hands get an additional card.
 14) Resolve Bust: If player hand is over 21, player loose.
 15) Dealer Bust: If dealer hand is over 21, dealr loose.
+
+Enum Suit{
+Club, Spade, Diamnod, Heart
+}
+
+Card{
+Suit suit;
+int faceValue;(1-10, A: 1,J: 11,K:12,Q:13)
+int gameValue;
+
+Card(Suit suit, String faceValue){
+this.suit = suit;
+this.faceValue = faceValue;
+if(faceValue.equals(1)){
+this.gameValue = 11; //A
+}else if(faceValue<10){
+this.gameValue = 10;
+}else{
+this.gameValue = faceValue;
+}
+}
+}
+
+
+Shoe{
+List<Cards> cards;
+Shoe(){
+for(Suit suit:suits){
+for(int i=1;i<=13;i++){
+cards.add(new Card(suit,i));
+}
+}
+}
+}
+
+
