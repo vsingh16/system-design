@@ -48,4 +48,26 @@ cards.add(new Card(suit,i));
 }
 }
 
+Hand{
+Card card1;
+Card card2;
+
+Hand(Card card1, Card card2){
+this.card1 = card1;
+this.card2 = card2;
+}
+
+List<Card> raiseHand(){
+
+return List.of(card1,card2);
+}
+
+}
+
+DealerHand extends Hand{
+  List<Card> raiseHand(){
+    return List.of(card1);
+  }
+}
+
 
