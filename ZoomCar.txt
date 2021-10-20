@@ -1,0 +1,59 @@
+Requirements: Zoom car is car renting services where customers can rent car.
+
+class Customer{
+
+private String name;
+private String email;
+private int mobileNumber;
+
+}
+
+class Vehicle{
+private String licensePlate;
+private int vid;
+private String color;
+private int year;
+private CarType carType;
+
+}
+
+enum CarType{
+
+String type;
+int capacity;
+standard(4),suv(10),miniSuv(6);
+
+}
+
+class VehicleInventory{
+
+private Map<Date,List<Vehicle>> vehicles;
+
+addVehicle(date,Vehicle);
+removeVehicle(date,Vehicle);
+searchVehicle(String type);
+searchVehicle(String model);
+
+}
+
+class ReservationDetails{
+
+Customer customer;
+Vehicle vehicle;
+Date reservationdate;
+Double bookingAmount;
+}
+
+class ReservationSystem{
+
+bookReservation(ReservationDetails){
+vehicleIntventory.removeVehicle(date,vehicle);
+}
+cancelReservation(ReservationDetails){
+vehicleIntventory.addVehicle(date,vehicle);
+}
+
+}
+
+
+
