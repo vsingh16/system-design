@@ -76,3 +76,8 @@ public Vehicle(VehicleType VehicleType, String licensePlate){
 }
 
 }
+
+
+enum VehicleType{
+  Bike,Car,Truck;
+}
