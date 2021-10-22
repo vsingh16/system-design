@@ -16,10 +16,6 @@ public Slot findAvailableParking(){
   floors.stream().findIfAny(Floor::findAvailableSlot);
 }
 
-public void exitParking(Vehicle vehicle){
-  vehicle.slot.exitVehicle();
-}
-
 
 }
 
@@ -70,18 +66,9 @@ class Vehicle{
 
 private VehicleType VehicleType;
 private String licensePlate;
-private Slot slot;
 public Vehicle(VehicleType VehicleType, String licensePlate){
   this.VehicleType = VehicleType;
   this.licensePlate = licensePlate;
-}
-
-public void setSlot(Slot slot){
-this.slot = slot;
-}
-
-public Slot getSlot(){
-return this.slot;
 }
 
 }
@@ -99,6 +86,6 @@ Parking parking = new Parking(floors);
 Slot slot = parking.findAvailableParking();
 Vehicle vehicle = new Vehicle(VehicleType.Car,1);
 slot.parkVehicle(vehicle);
-parking.exitParking(vehicle);
+slot.exitVehicle();
 
 }
