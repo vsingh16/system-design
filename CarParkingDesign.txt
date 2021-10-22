@@ -17,7 +17,7 @@ public Slot findAvailableParking(){
 }
 
 public void exitParking(Vehicle vehicle){
-  vehicle.floor.exitVehicle();
+  vehicle.slot.exitVehicle();
 }
 
 
