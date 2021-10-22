@@ -17,7 +17,7 @@ public Slot findAvailableParking(){
 }
 
 public void exitParking(Vehicle vehicle){
-  vehicle.slot.exitVehicle();
+  vehicle.floor.exitVehicle();
 }
 
 
@@ -60,6 +60,19 @@ this.vehicle= vehicle;
 
 void exitVehicle(){
 this.vehicle= null;
+}
+
+}
+
+
+class Vehicle{
+
+private VehicleType VehicleType;
+private String licensePlate;
+private Slot 
+public Vehicle(VehicleType VehicleType, String licensePlate){
+  this.VehicleType = VehicleType;
+  this.licensePlate = licensePlate;
 }
 
 }
