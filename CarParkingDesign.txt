@@ -55,6 +55,7 @@ slot.vehicle == null;
 }
 
 void parkVehicle(Vehicle vehicle){
+vehicle.setSlot(this);
 this.vehicle= vehicle;
 }
 
@@ -69,10 +70,18 @@ class Vehicle{
 
 private VehicleType VehicleType;
 private String licensePlate;
-private Slot 
+private Slot slot;
 public Vehicle(VehicleType VehicleType, String licensePlate){
   this.VehicleType = VehicleType;
   this.licensePlate = licensePlate;
+}
+
+public void setSlot(Slot slot){
+this.slot = slot;
+}
+
+public Slot getSlot(){
+return this.slot;
 }
 
 }
@@ -80,4 +89,16 @@ public Vehicle(VehicleType VehicleType, String licensePlate){
 
 enum VehicleType{
   Bike,Car,Truck;
+}
+
+
+psvm{
+
+List<Floors> floors = List.of(new Flor(1,new Slot(1)));
+Parking parking = new Parking(floors);
+Slot slot = parking.findAvailableParking();
+Vehicle vehicle = new Vehicle(VehicleType.Car,1);
+slot.parkVehicle(vehicle);
+parking.exitParking(vehicle);
+
 }
