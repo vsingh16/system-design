@@ -1,0 +1,65 @@
+1) We have a parking.
+2) its multi level parking.
+3) find a free slot.
+4) Park car to slot.
+5) Exit vehcile.
+6) Find Vehicle's slot.
+
+class Parking{
+
+private List<Floor> floors;
+Parking(List<Floors> floors){
+this.floors = floors;
+}
+
+public Slot findAvailableParking(){
+  floors.stream().findIfAny(Floor::findAvailableSlot);
+}
+
+public void exitParking(Vehicle vehicle){
+  vehicle.slot.exitVehicle();
+}
+
+
+}
+
+class Floor{
+
+private int floorNumber;
+private List<Slots> slots;
+
+public Floor(int floorNumber,List<Slots> slots){
+this.floorNumber = floorNumber;
+this.slots = slots;
+}
+
+
+public Slot findAvailableSlot(){
+slots.stream().findIfAny(Slot::isAvailable);
+}
+
+}
+
+
+class Slot{
+
+private int slotNumber;
+private Vehicle vehicle;
+
+public Slot(int slotNumber){
+this.slotNumber = slotNumber;
+}
+
+boolean isAvailable(){
+slot.vehicle == null;
+}
+
+void parkVehicle(Vehicle vehicle){
+this.vehicle= vehicle;
+}
+
+void exitVehicle(){
+this.vehicle= null;
+}
+
+}
