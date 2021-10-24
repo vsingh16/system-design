@@ -1,0 +1,10 @@
+Requirements:
+1)Hotel management must be able to add/update/delete hotel.
+2)Customer should be able to search/book hotel rooms.
+3)Analytics on revenue and customer behaviour.
+
+Hotel OnBoarding Service:
+
+client -> LB -> Hotel Onboarding Service -> My SQL Cluster
+
+
