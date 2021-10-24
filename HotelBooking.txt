@@ -13,3 +13,9 @@ Room(id, hotel id, room type, occupancy status)
 Room Type = Single/ Double
 Occupancy Status = Booked/ UnBooked
 
+
+Hotel Search Service:
+
+Hotel Onbaording Service ----------------------------------------------> Kafka
+                                                                          |
+Client -> LB -> Search Service -> Elastic Search <- Search Consumer <- - -|
