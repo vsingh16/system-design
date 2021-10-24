@@ -7,4 +7,9 @@ Hotel OnBoarding Service:
 
 client -> LB -> Hotel Onboarding Service -> My SQL Cluster
 
+Hotel(id, name, location id)
+Location(id, street address, city, state, country, Pin Code)
+Room(id, hotel id, room type, occupancy status)
+Room Type = Single/ Double
+Occupancy Status = Booked/ UnBooked
 
