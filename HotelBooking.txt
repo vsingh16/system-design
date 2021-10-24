@@ -3,7 +3,7 @@ Requirements:
 2)Customer should be able to search/book hotel rooms.
 3)Analytics on revenue and customer behaviour.
 
-Hotel OnBoarding Service:
+1) Hotel OnBoarding Service:
 
 client -> LB -> Hotel Onboarding Service -> My SQL Cluster
 
@@ -13,9 +13,39 @@ Room(id, hotel id, room type, occupancy status)
 Room Type = Single/ Double
 Occupancy Status = Booked/ UnBooked
 
+Hotel Management will interact will hotel onbaording service to add/modify their properties.
 
-Hotel Search Service:
+2) Hotel Search Service:
 
 Hotel Onbaording Service ----------------------------------------------> Kafka
                                                                           |
 Client -> LB -> Search Service -> Elastic Search <- Search Consumer <- - -|
+
+All updates from Hotel Management Servcie will flow to Elastic Search via Kafka.
+Client will do search on top of ealstic search.
+
+3)Hotel Booking.
+
+Client -> LB -> Booking Service -> Redis -> MY Sql Cluster -> Kafka -> Notification Service
+                 |
+                Payment Service
+1)Client will send booking request.
+2)Temporarily room will be blcoked in cache.
+3)On Payment success, records will be updated in DB.
+4)Notification service will send sms/email to client and hotel about booking.
+
+Booking(id, user id, hotel id, no of rooms, Payment amount, from date, to date)
+BookingRoomInfo(booking id, room id)
+
+4)Booking Archival: All completed/cancelled booking info will be moved into Cassandra Cluster.
+
+5)View Bookings: 
+client -> Booking Service -> (Active Bookings(Redis+ My SQL) , Archived Bookings(Cassandra Cluster))
+Booking View Service will load data from Redis for active bookings and old bookings will be lloaded from cassandra.
+
+6)Analytics.
+Everytime any activity happening, all service will send data to Hadoop CLuster via Kafa.
+Where Spark,Hive etc will be used for analytics.
+
+
+
