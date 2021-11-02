@@ -15,4 +15,7 @@ DB Table: User(id, name, email, mb)
 Client -> LB -> User Service -> Redis -> My SQL Cluster
 DB Table: Friendship Table(id, following user id, follower user id)
 
-3)
+3)Post/Upload photo/video
+Refer Video upload part
+https://github.com/vsingh16/system-design/blob/master/YoutubeDesign.txt
+
