@@ -1,0 +1,18 @@
+Requirements:
+1) User Profile Creation
+2) Add/Follow Friends
+3) Post/Upload photo/video
+4) Like/Comment
+5)TimeLine Generation
+
+1)Creating User Profile
+
+Client -> LB -> User Service -> Redis -> MY SQL Cluster
+
+DB Table: User(id, name, email, mb)
+
+2)Add Friends
+Client -> LB -> User Service -> Redis -> My SQL Cluster
+DB Table: Friendship Table(id, following user id, follower user id)
+
+3)
