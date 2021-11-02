@@ -24,5 +24,8 @@ Refer DB Schema
 https://github.com/vsingh16/system-design/blob/master/YoutubeDesign.txt
 Count for recent phots are maintained in Redis Cache.
 
-5)
+5)Timeline Generation:
+Fan out in case of normal user and celebrity case handling.
+https://github.com/vsingh16/system-design/blob/master/TwitterSystemDesign.txt
+
 
