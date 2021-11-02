@@ -19,3 +19,10 @@ DB Table: Friendship Table(id, following user id, follower user id)
 Refer Video upload part
 https://github.com/vsingh16/system-design/blob/master/YoutubeDesign.txt
 
+4)Like/Dislike/Comment
+Refer DB Schema
+https://github.com/vsingh16/system-design/blob/master/YoutubeDesign.txt
+Count for recent phots are maintained in Redis Cache.
+
+5)
+
