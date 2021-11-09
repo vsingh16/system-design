@@ -10,3 +10,28 @@ hash % 4 : This will result in new locations and key will not be found in cache(
 Since this will start happening for almost 90% keys, DB will experience load and it may crash.
 Similarly, if one of cache server is removed, hash % 2, will give new locations and same incident can happen.
 
+To address this, consistent hashing is used.
+https://www.toptal.com/big-data/consistent-hashing
+Servers are placed at some angle is ring.
+Data is divided on ring by (360/INT_MAX) * hash.
+Key will belong to nearest server in anti clockwise direction.
+
+Now if  server B goes down, the rest two server will remain unaffected.
+and cache miss will happen for server B and eventually keys will get their new locations on server A and Server C.
+So rather than rehashing happening for all servers. Only one server is affected.
+Impact : Keys / N(server)
+Similar thing will happen when a new server is added.
+
+Equal load distribution:
+Now suppose, most keys are in range b/w C and B, so that most of keys will go to Server B(anti clockwise).
+To fix this, rather than placing server at one point/angle, multiple angles on circle are assinged to server.
+
+Data Backup:
+In cloud, a single server is backed by secondary servers which come in place if a server fails.
+We do have a zookeeper, which tracks all server related info like ip of secondary server turing primary.
+Ranges(angles) each server is handling.
+
+
+
+
+
