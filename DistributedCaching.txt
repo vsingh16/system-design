@@ -1,0 +1,12 @@
+Ref Link: https://www.toptal.com/big-data/consistent-hashing
+
+As we know that in cache we have key and value pair.
+This is like HashMap.
+Now when we talk about distributed caching where multiple servers involved and autoscaling can also happen
+Hashing % N way of distributing key will not work.
+
+Suppose we have 3 servers, keys are distributed by hash % 3, now a new server is added.
+hash % 4 : This will result in new locations and key will not be found in cache(cache miss) and data is loaded from DB.
+Since this will start happening for almost 90% keys, DB will experience load and it may crash.
+Similarly, if one of cache server is removed, hash % 2, will give new locations and same incident can happen.
+
