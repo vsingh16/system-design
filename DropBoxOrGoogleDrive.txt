@@ -33,6 +33,16 @@ client workspace: from where this file get uploaded.
 3)Chunker will divide into chunks.
 4)Metadata info is saved in local db.
 5)Chunks are stored in S3.
+6)Client 1 will send this information to Sync Service via messaging queue.
+7)Sync service will update its metadata db and sends updates to other connected client devices for same user.
+8)Other clients will recieve updates and update their internal Db & sync folder.
+
+3)History of updates: Since we are keeping multiple copies for updates & has this info in db.
+
+Note: we need SYnc service/central service , so that we can reflect same files in other connected clients.
+We need internal DB for fast db access/metadata info & this helps in case we are offline.
+Once we come online, we can save to cloud & notify sync service.
+In case other clients are offline, they will have updates from sync service on messagin queue which they will get once online.
 
 
 
