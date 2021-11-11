@@ -21,8 +21,9 @@ For update, only updated chunk wil get stored not the whole file.
 Now question arise how will we manage file seq etc.
 So we keep metada info.
 Metadata Table
-(chunk hash id, file, user, client workspace)
+(chunk hash id, seq id, file, user, client workspace)
 chunk hash id : this will be unique for each chunk.
+seq: positioning of chunk in file.
 file: file name chunk belongs to.
 user: who edited this file.
 client workspace: from where this file get uploaded.
