@@ -1,0 +1,40 @@
+Ref Link: https://www.youtube.com/watch?v=U0xTu6E2CT8
+
+Requirements:
+1) Upload/Download
+2) Sync Folder
+3) History of Updates
+
+Drop Box Client--------------------------upload---------------------> AWS S3(CLoud Storage)
+[internal db,chunker,watcher]----------------------------->Messageing Service ---------------> Syn Service( Metadata DB)
+                                                                        |
+client 2 --------------------------------------------------------------
+
+1) Upload:
+One way could be client directly uploads file to S3.
+In that case if file is of size 20 MB, 20MB storage happens in S3.
+Now we edit file, since we need to keep versions, again 20MB file copy will be saved.
+This is first problem to address.
+We can divide files in chunks, so during first upload 10 chunks of 2 MB each gets stored.
+For update, only updated chunk wil get stored not the whole file.
+
+Now question arise how will we manage file seq etc.
+So we keep metada info.
+Metadata Table
+(chunk hash id, file, user, client workspace)
+chunk hash id : this will be unique for each chunk.
+file: file name chunk belongs to.
+user: who edited this file.
+client workspace: from where this file get uploaded.
+
+2)Sync Folder:
+1)Client 1 adds some file.
+2)Watcher at client 1 keeps checking for any updates.
+3)Chunker will divide into chunks.
+4)Metadata info is saved in local db.
+5)Chunks are stored in S3.
+
+
+
+
+
