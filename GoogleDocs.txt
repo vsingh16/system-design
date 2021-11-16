@@ -1,0 +1,29 @@
+Ref Link:
+https://www.youtube.com/watch?v=U2lVmSlDJhg&t=376s
+
+Requirements:
+
+1) Collaborative Editing: i.e multiple users can view/edit doc same time online.
+2) Doc Permission Managment
+
+Core Concept:
+Operational Transform: Every time any user edits doc, an event is generted and send to server. Server fruther broadcast to online users working on same document.
+In case if client B has also done some edit. Server will transform the event for client B and then send to it.
+
+
+Client --------------->
+                    API Gateway --------------> User Service(Authentication/Authorization)---------> RDBMS
+                     |--------------> Doc Service--------------> AWS S3 & No SQL
+                     |------------------------------------------------------------------------------>Session Server-------> TimeLine Series DB for all Users
+                     |                                                                                 ^   
+Client --------------><--------------------------> Web Socket<---------> Operational Event Queue-------|
+
+
+1) Client login will be handled by User Service. This service will store user level info RDBMS.
+
+2) Doc service will handle all document related APIs. eg get document, save document, delete document etc.
+This will also take care of document permissions.
+Document will be saved in AWS S3. and documment metadata, comments etc are stored in NO SQL DB.
+
+3) After successful login, web socket connection is estaiblished b/w client and server. Two way communication b/w clients and server will happen for edit events.
+Those events are passed on JMS queue and from there it is consumed by server/client.
