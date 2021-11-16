@@ -9,8 +9,20 @@ Requirements:
 Core Concept:
 Operational Transform: Every time any user edits doc, an event is generted and send to server. Server fruther broadcast to online users working on same document.
 In case if client B has also done some edit. Server will transform the event for client B and then send to it.
+Client 1 | Client 2
 
+    ABCD | ABCD
 
+Insert X at 4 | Delete at 2
+ABCXD | ACD
+Send Insert X at 4 to Client 2 | Send Delete at 2 to CLient 1
+Transformed Event: Delete at 2 | Insert X at 3
+ACXD | ACXD
+
+Transformed Event: Delete at 2 | Insert X at 3
+Since at client 1, Delete was at 2nd position and prioer edit was at 4th pos, so no change to event.
+Since at client 2, Prior delete was at 2n pos and insert is at 4th, so after operational transform, insert at 4 is changed to insert at 3.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Client --------------->
                     API Gateway --------------> User Service(Authentication/Authorization)---------> RDBMS
                      |--------------> Doc Service--------------> AWS S3 & No SQL
