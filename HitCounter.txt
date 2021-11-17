@@ -1,0 +1,42 @@
+Ref Link:
+https://www.geeksforgeeks.org/design-a-hit-counter/
+Design a hit counter which counts the number of hits received in the past 5 minutes.
+It should support the following two operations: hit and getHits.
+
+hit(timestamp) – record hit at given timestamp.
+
+getHits(timestamp) – Returns the number of hits received in the past 5 minutes (300 seconds) (from given timestamp).
+
+HitCounter counter = new HitCounter();
+
+// hit at timestamp 1.
+counter.hit(1);
+
+// hit at timestamp 2.
+counter.hit(2);
+
+// hit at timestamp 3.
+counter.hit(3);
+
+// get hits at timestamp 4, should return 3.
+counter.getHits(4);
+
+// hit at timestamp 300.
+counter.hit(300);
+
+// get hits at timestamp 300, should return 4.
+counter.getHits(300);
+
+// get hits at timestamp 301, should return 3.
+counter.getHits(301);
+
+
+Approach : Here we can take queue, where we will insert timestamp. Since it will be in an order, getHits(): will remove nodes which are not in range and then return
+queue size. Time Complexity : O(n), Space Complexity : O(n) 
+
+Secon Approach: Keep timestamp[], count[],
+find index = time%300, if there is already value override it, since we only need to keep latest value.
+If same time multuiple request comes, increase counter else 1
+
+
+
