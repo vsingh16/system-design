@@ -1,0 +1,33 @@
+Requirements:
+Implement put(key,value) & get(key) of Hashmap.
+
+class Entry<K,V>{
+
+private K key;
+private V value;
+
+public Entry<K,V>(K key, V value){
+  this.key = key;
+  this.value = value;
+}
+
+}
+
+
+class Map<K,V>{
+
+private int size = 16;
+private Entry<K,V> buckets[] = new Entry[size];
+
+public void put(K key, V value){
+  int index = key.hashcode()%size;
+  Entry entry = buckets[index];
+  if(entry == null){ //first entry
+    buckets[index] = new Entry(key,value);
+  }else{
+  }
+
+
+}
+
+}
