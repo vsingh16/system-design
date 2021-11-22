@@ -22,12 +22,34 @@ private Entry<K,V> buckets[] = new Entry[size];
 public void put(K key, V value){
   int index = key.hashcode()%size;
   Entry entry = buckets[index];
+  boolena append = false;
   if(entry == null){ //first entry
     buckets[index] = new Entry(key,value);
   }else{
+    while(enty.next != null){       
+      if(entry.key.equals(key)){ //override
+        entry.value = value;
+        append = false;
+        entry = entry.next;
+      }
+    }
+    // append case
+    entry.next = new Entry(key,value);
   }
 
+}
 
+public V get(K key){
+  int index = key.hashcode()%size;
+  Entry entry = buckets[index];
+  while(entry !=null && !entry.key.equals(key)){
+     entry = entry.next;
+  }
+  if(entry !=null){
+    return entry.value;
+  }else{
+    return null;
+  }
 }
 
 }
