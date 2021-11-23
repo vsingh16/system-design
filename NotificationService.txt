@@ -1,0 +1,26 @@
+Requiremnts:
+1) Send notifications
+2) Pluggable : a new handler whatsapp/sms can easily be integrated
+3) Rate Limiting
+4) Priortization : OTP is high priority
+
+UI -> Bulk Service
+              | 
+
+              |                                                                                             -------------------> IVR 
+                                                                                                           -------------------> SMS
+client1 ->    |                      Low Priority Queue       Redis             User Service(MY SQL DB)        
+            LB -> NS -> Priortizer -|                   -> Rate Limiter -> User Pref Service ------------->Kafka--------------> EMAIL
+client1 ->                          High Priority Queue
+
+
+
+1) Clients send request to Notification Service.
+2) Request : from, to , Map<String, String> attributes, medium (email/sms/whatsapp)
+3) Priortizer : Based on attributes in message , we can have business logic to decide priority(high/low) and forward to relevant queue.
+4) Rate Limiter : this will interact with user service to find threshold for sender. Keeps updating counter for a day in Redis cache. and if counter > threshold , it will drop 
+message.
+5)User Pref Service: This usually takes care of user(receiver) prefernce. User information can be retrived from user service which has DB and stores chocies.
+6)Message is dispatched to different targets IVR/EMAIL/SMS.
+7)Bulk Service : UI will send bulk messages to NS.
+
