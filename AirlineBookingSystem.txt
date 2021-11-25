@@ -10,8 +10,6 @@ Requirements:
 This is similar to online booking system for hotel/bus etc.
 https://github.com/vsingh16/system-design/blob/master/DesignRedBus.txt
 
-Lets focus on inventory design.
-
 class Airline{
 String name;
 List<Flight> flights;
