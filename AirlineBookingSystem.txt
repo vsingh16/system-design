@@ -55,4 +55,51 @@ class BookingInfo{
 String bookingId;
 User bookingUser;
 DateTime bookingDateTime;
+double bookingAmount;
+Transaction transaction;
+FlightSchedule FlightSchedule;
+Map<User,Seat> bookingSeats;
+boolean isSuccess;
+}
+
+class Transaction{
+String transactionId;
+double bookingAmount;
+PaymentMethod paymentMethod;
+DateTime bookingDateTime;
+boolean isSuccess;
+}
+
+enum PaymentMethod{
+card, upi, paypal
+}
+
+interface Payment{
+ boolean pay(double amount);
+}
+
+class Card implements Payment{
+  String name;
+  Date expiryDate;
+  String cardNumber;
+  boolean pay(double amount);//override
+}
+
+class Upi implements Payment{
+  String upiId;    
+  boolean pay(double amount);//override
+}
+
+class Notification{
+String content;
+DateTime dateTime;
+}
+
+
+class EmailNotification extends Notification{
+String emailId;
+}
+
+class SMSNotification extends Notification{
+String mobileNumber;
 }
