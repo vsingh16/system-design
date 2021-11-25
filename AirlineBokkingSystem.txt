@@ -1,0 +1,58 @@
+Requirements:
+1)User can do registeration.
+2)User can serach all airlines information.
+3)Operator can feed ticket booking info.
+4)Customer can perform booking.
+5)Our System notify for any updates.
+6)Management can validate analytics report.
+7)Offer details can share to users.
+
+This is similar to online booking system for hotel/bus etc.
+https://github.com/vsingh16/system-design/blob/master/DesignRedBus.txt
+
+Lets focus on inventory design.
+
+class Airline{
+String name;
+List<Flight> flights;
+}
+
+class Flight{
+String number;
+Airport source;
+Airport destination;
+Airline airline;
+}
+
+class Airport{
+String name;
+String code;
+}
+
+class FlightSchedule{
+Flight flight;
+DateTime dateTime;
+List<Seat> seat;
+}
+
+class Seat{
+String seatNumber;
+SeatCategory SeatCategory;
+double fare;
+BookingStatus BokkingStatus;
+}
+
+enum SeatCategory{
+Premium, Economy
+}
+
+enum BookingStatus{
+Reserved, Unreserved
+}
+
+
+class BookingInfo{
+String bookingId;
+User bookingUser;
+DateTime bookingDateTime;
+}
