@@ -11,7 +11,7 @@ class Board{
   }
   
   //initial board setting
-  public void initialize(){
+  public Board(){
    box[0][0] = new Box(0,0,new Pawn(true,true)); //similarly for other positions too.
   }
 }
@@ -126,3 +126,44 @@ public abstract boolean canMove(Box start, Box end){
 }
 }
 
+class Player{
+
+private String name;
+private boolean isWhite;
+
+public Player(String name, boolean isWhite){
+  this.name = name;
+  this.isWhite = isWhite;
+}
+
+}
+
+class Game{
+private Player players[];
+private Player currentPlayer;
+private Board board;
+
+public Game(){
+ this.players = new Player[2];
+ this.currentPlayer = payers[0].isWhite ? payers[0] : payers[1];
+ this.board = new Board();
+}
+
+public void makeAMove(int startX, int startY, int endX, int endY){
+
+  Piece startPiece = borad[startX][startY].box.piece;
+  Piece endPiece = borad[endX][endY].box.piece;
+  
+  if(startPiece.canMove(borad[startX][startY].box, borad[endX][endY].box)){
+    if(endPiece!=null){
+       endPiece.isAlive = false;
+    }
+    borad[endX][endY].box.piece = startPiece;
+    borad[startX][startY].box.piece = null;    
+    
+    //change currentPlayer
+    this.currentPlayer = player[0] == currentPlayer ? payers[1] : payers[0];
+  }
+}
+
+}
