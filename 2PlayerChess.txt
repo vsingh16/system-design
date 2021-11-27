@@ -1,2 +1,128 @@
 We have a borad.
 Board consists of boxes.
+Each box has a piece and position.
+Each Piece will have color, dead status and it can be king, queen, knight, bishop, rook ,pawn etc.
+Game consist of boards and players.
+
+class Board{
+  private Box[][];
+  public Board(){
+    this.box = new Box[64][64];    
+  }
+  
+  //initial board setting
+  public void initialize(){
+   box[0][0] = new Box(0,0,new Pawn(true,true)); //similarly for other positions too.
+  }
+}
+
+class Box{
+  private int x;
+  private int y;
+  private Piece Piece;
+  
+  public Box(int x, int y, Piece piece){
+    this.x = x;
+    this.y = y;
+    this.piece = piece;
+  }
+  
+}
+
+abstract class Piece{ //because Noun, hence class over interface
+
+private boolean isWhite;
+private boolean isAlive;
+public Piece(boolean isWhite, boolean isAlive){
+  this.isWhite = isWhite;
+  this.isAlive = isAlive;
+}
+
+public abstract boolean canMove(Box start, Box end);
+}
+
+
+class King extends Piece{
+
+//one step in any direction
+public abstract boolean canMove(Box start, Box end){
+  if(end.isWhite.equals(start.isWhite)){ //same color piece, already there we can't move
+    return false;
+  }
+  int x = Math.abs(end.x - start.x);
+  int y = Math.abs(end.y - start.y);
+  
+  if(x+y == 1 || x+y == 2){ //2 for diagonal steps
+      return true;
+  }
+}
+}
+
+class Knight extends Piece{
+
+//2.5 steps
+public abstract boolean canMove(Box start, Box end){
+  if(end.isWhite.equals(start.isWhite)){ //same color piece, already there we can't move
+    return false;
+  }
+  int x = Math.abs(end.x - start.x);
+  int y = Math.abs(end.y - start.y);
+  
+  if((x == 2 && y == 1) || (x == 1 && y == 2)){ // we can also say x*y == 2
+    return true;
+  }
+}
+}
+
+
+
+
+class Bishop extends Piece{
+
+//Can move n steps Diagonal
+public abstract boolean canMove(Box start, Box end){
+  if(end.isWhite.equals(start.isWhite)){ //same color piece, already there we can't move
+    return false;
+  }
+  int x = Math.abs(end.x - start.x);
+  int y = Math.abs(end.y - start.y);
+  
+  if(x == y && no piece b/w start and end){ // same no of x & y steps . diagonal
+    return true;
+  }
+}
+}
+
+class Rook extends Piece{
+
+//Can move n steps either horizontal or vertical
+public abstract boolean canMove(Box start, Box end){
+  if(end.isWhite.equals(start.isWhite)){ //same color piece, already there we can't move
+    return false;
+  }
+  int x = Math.abs(end.x - start.x);
+  int y = Math.abs(end.y - start.y);
+  
+  if((x == 0  || y == 0 )&& no piece b/w start and end){ 
+    return true;
+  }
+}
+}
+
+
+class Pawn extends Piece{
+
+//Can move 1 step either ahead or back
+public abstract boolean canMove(Box start, Box end){
+  if(end.isWhite.equals(start.isWhite)){ //same color piece, already there we can't move
+    return false;
+  }
+  int x = Math.abs(end.x - start.x);
+  int y = Math.abs(end.y - start.y);
+  
+  if((x == 0  && y == 1 ){ 
+    return true;
+  }
+}
+}
+
