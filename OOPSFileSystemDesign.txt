@@ -1,0 +1,21 @@
+1) Directory will have files and subSirectories.
+2) File will have content etc.
+
+//This class will have common properties
+class Entity{
+private String name;
+private Date createdDate;
+private Date lastUpdatedDate;
+private Date lastAccessedDate;
+}
+
+
+class File extends Entity{
+private double size;
+private String content;
+}
+
+
+class Directory extends Entity{
+private List<Entity> entities;
+}
