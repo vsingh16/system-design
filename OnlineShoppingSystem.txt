@@ -1,0 +1,85 @@
+Requirements:
+1) Product Search
+2) Product Search should also display if item can be delivered on user's location.
+3) Cart & Wish List add.
+4) Order Placement & Payment
+5) Order viewing
+
+1) User Registeration
+
+client -> LB -> User Service -> Redis cache -> My SQL DB
+
+2) Inventory On Boarding.
+
+Client -> LB -> Inventory Service -> Redis Cache -> No SQL DB
+Reason for picking no sql is that, data is unstrucred.
+eg: Clothes has atrributes. size : l, xl, m , s etc.
+Rice : kgs etc.
+
+3)Product Search : Since search can be with fuzzy text, we can go with elastic search.
+
+                                                                        Inventory Service - will send events on kafka
+                                                                                            |
+client -> LB -> Product Search Service -> Elastic Search <- Elastci Search Feed Service <- Kafka
+                                       -> Inventory Service
+                                       -> Delivery Service
+                                       
+When a product is added to inventory, inventory service will send information on Kafka.
+Elastic Search Feed Service will listen those events and push info to Elastic Search.
+Images will be sotred in S3 and can be loaded by their URL.
+
+4)Product Search should also display if item can be delivered on user's location.
+We may have a product available in multiple inventories based on certain algorithm , we will pass upto 5 near by invetories to Delivery Service, if they
+can pick and deliver to our location. Based on this, we will show delivery available or not.
+
+5)Cart & Wish List
+
+client -> LB -> Cart Service -> Redis Cache
+             -> Wish List Service -> Redis Cache
+             
+If we decide to keep cart and wishlist info upto certain time.
+We can store this info in distribited cache rather than DB.
+
+6)Order Placement
+
+client -> LB -> order Service -> MY SQL
+                     |             
+               Inventory Service
+               Payment Service
+               
+Order service will generate an order id.
+Then it will block items in inventory.
+Inventory Service can block items first in cache for certain time
+and if payment is success, it can update DB. This will save DB operation cost.
+After blocking items, it will call payment service for payment.
+
+Case1: if payment is success with certain time(timeout), Transaction id is genrated.
+Order Service will update its DB.
+
+Case2: if payment is failed with certain time(timeout), transaction fails.
+Order Service will update DB with order status as failed.
+
+7)Order Archivals:
+since we may have lots of order in a day/month, archival service will be batch job which will move some old order records
+into cheaper dB./Cloud
+
+8)Order Viewing Service will be on top of Active & Inactive Orders.
+
+9) After this event will send to Kafka.Notification service will further send notifcation to customer via SMS/email
+
+10)In this whole process, lots of event send to Kafka
+
+kafka -> Spark Streaming Jobs-> Hadoop 
+
+      Spark Analytics Batch Jobs  run on top of Hadoop for recommendations.
+Recommendation will be based on user search/cart add/wish list add.
+Inventroy product add, category update.
+        
+11)   
+
+       
+
+
+
+
+
