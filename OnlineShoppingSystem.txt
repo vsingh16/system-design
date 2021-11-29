@@ -75,11 +75,5 @@ kafka -> Spark Streaming Jobs-> Hadoop
 Recommendation will be based on user search/cart add/wish list add.
 Inventroy product add, category update.
         
-11)   
-
-       
-
-
-
-
-
+11) Home Screen : Populated from Recommendation Engine
+Client -> LB -> Recommendation Engine
