@@ -1,0 +1,19 @@
+BSR: This is used to find out ranking of a product in its category, sub category, sub sub category.
+
+Ref Link: https://www.youtube.com/watch?v=ontAs5VfCwo
+
+client -> LB -> Order Service -> KAFKA -> HDFS
+                                           |
+                                           Spark Streaming Jobs -> Redis
+                                                                    |
+                                                                    Rank Web Service
+                                                                    
+Whenver an order is palced, events are send to HDFS.
+Spark jobs will process those events and keep updating rank. These results are stored in Redis cache.
+Amazon Rank Web Service will pull results based on product id from cache.
+
+HDFS:
+product id, category id, sub category id, sub sub category id, qty sold/return, 
+  1, A, B , C , +1/-1
+  
+  
