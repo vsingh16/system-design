@@ -1,0 +1,8 @@
+Requirements:
+Clients/Brokers should be able to buy/sell stocks.
+They should be able to view realtime stock prices.
+PS: Note that this is like designing Bombay Stock Exchange and is different from brocker apps Paytm Money App/Kite app etc.
+
+Ref Link:
+https://www.grokkingsystemdesigns.com/design-stock-exchange/
+https://www.youtube.com/watch?v=dUMWMZmMsVE
