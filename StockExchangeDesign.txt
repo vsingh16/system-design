@@ -6,3 +6,31 @@ PS: Note that this is like designing Bombay Stock Exchange and is different from
 Ref Link:
 https://www.grokkingsystemdesigns.com/design-stock-exchange/
 https://www.youtube.com/watch?v=dUMWMZmMsVE
+
+
+client -> LB -> queue per stock -> Matching Engine -> Rdis
+                                          |         -> Cassandra DB
+                                          queue
+                                          |
+                                     Stock DB
+                                          |
+                                          CDC
+                                          |
+Client -web socket---  Ticker Service --         Stock Price    --Ticker DMQ 
+                        Compute Engine
+                           |
+                         TimeSeries Based DB(Flux)  
+                         
+                         
+1) Client sends buy/sell order request on queue. This request is processed by Matching Engine.
+2) Matching Engine : It is responsbile for matching order and sell requests and complete that.
+Since its stock exchange, it should be very fast.
+Below lists will be sorted order. i.e whenver any request comes, we keep comparing it with existing nodes to find its position. O(n)
+Buy Linked List : 100/5 , 90/2, 80/1
+Sell Linked List: 101/4, 98/3, 80/2
+
+Matching engine will pick node biding higher cost . If it able to match it with sell bid, Order get executed.
+Orders can be partially completed also.
+
+
+
