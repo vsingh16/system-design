@@ -9,10 +9,9 @@ https://www.youtube.com/watch?v=dUMWMZmMsVE
 
 
 client -> LB -> queue per stock -> Matching Engine -> Rdis
-                                          |         -> Cassandra DB
+                                          |         -> Stcok Cassandra DB
                                           queue
                                           |
-                                     Stock DB
                                           |
                                           CDC
                                           |
@@ -28,9 +27,17 @@ Since its stock exchange, it should be very fast.
 Below lists will be sorted order. i.e whenver any request comes, we keep comparing it with existing nodes to find its position. O(n)
 Buy Linked List : 100/5 , 90/2, 80/1
 Sell Linked List: 101/4, 98/3, 80/2
+Orders can also be stored in Max Heap O(1) , O(logn)
 
 Matching engine will pick node biding higher cost . If it able to match it with sell bid, Order get executed.
 Orders can be partially completed also.
+Matching Engine will have separate VMS for each stock. Each VM will have its secondary Server.
+Primary/Seacondary will be managed by zookeeper.
+It will also store information about recent orders in Redis cache & all orders info goes to casanda db.
+
+Once order is exectued , its info flows to queue. Ticker Services's compute engine will update stock price based on that.
+Here we need to note that, we need to capture stock price at each t instance, so we need timeseries based DB. eg Flux Db.
+Tikcer service will keep sending new prices at every th time to client via web socket.
 
 
 
