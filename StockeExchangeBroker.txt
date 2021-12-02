@@ -1,0 +1,56 @@
+Desing OOPS Class Model for Stock Broker App like Zeordha etc.
+
+class User{
+Long id;
+String name;
+String email;
+Int mobileNo;
+Holding holding;
+}
+
+class Holding{
+List<StockHolding> stockHoldings;
+}
+
+class StockHolding{
+Long stockId;
+Int qty;
+Double pricepurchased;
+}
+
+
+class MarketWatch{
+List<Watchlist> watchList;
+}
+
+class Watchlist{
+List<Stock> stock;
+}
+
+class Stock{
+Long id;
+String stockName;
+String stockCode;
+Double 52%high;
+Double 52%low;
+}
+
+Class Order{
+Long orderId;
+DateTime created;
+Double pricePlaced;
+Stock stock;
+Int qty;
+
+placeOrder(){
+StockExchange.placeOrder();
+}
+}
+
+
+//BSE/ NSE
+interface StockExchange{
+
+placeOrder(Order);
+getLatestStockPrice(stock); //web socket call will refelect latest prices from Stock exchange to Broker Apps.
+}
