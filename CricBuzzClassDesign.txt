@@ -1,0 +1,86 @@
+Match is b/w India & New Zealand at 4 Dec, 2021 in Kanpur,India.
+Match Result: India won by 7 wickets.
+ScoreBoard: Innings, Totoal socre & wickets. Plaeyrs, Overs.
+Each Over is of balls.
+
+class Ball{
+int number;
+int run;
+Wicket wicket;
+BallType ballType;
+PlayerInstance playedBy;
+PlayerInstance bowledBy;
+}
+
+enum BallType{
+FAIR, NO_BALL, WIDE
+}
+
+abstract class Wicket{
+ PlayerInstance outPlayer;
+}
+
+CleanBold extends Wicket{
+PlayerInstance bowledBy;
+}
+
+
+LBW extends Wicket{
+PlayerInstance bowledBy;
+}
+
+CatchOut extends Wicket{
+PlayerInstance bowledBy;
+PlayerInstance catchBy;
+}
+
+RunOut extends Wicket{
+PlayerInstance runOutBy;
+}
+
+class Over{
+int number;
+List<Balls> balls;
+int run;
+int wickets;
+
+void addBall(Ball ball){
+this.balls.add(ball);
+}
+}
+
+class Innings{
+private int number;
+List<PlayerInstance> players;
+int totalRun;
+int totalWickets;
+List<Over> overs;
+
+void addOver(Over over){
+}
+}
+
+//this is for palyer's current match performance
+class PlayerInstance{
+Player player;
+int runs;
+int wickets;
+List<Over> overs;
+}
+
+//This represent historic player stats
+class Player{
+String name;
+String country;
+Int age;
+int highestScore;
+int maxWicket;
+int run;
+int wickets;
+}
+
+class Match{
+MatchType matchType;
+List<Innings> innings;
+
+}
