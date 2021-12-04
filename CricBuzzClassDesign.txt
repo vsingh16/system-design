@@ -82,5 +82,20 @@ int wickets;
 class Match{
 MatchType matchType;
 List<Innings> innings;
-
+List<Team> teams;
+Date date;
+String stadium;
+MatchResult matchResult;
 }
+
+enum MatchType{
+T_20, T_50
+}
+
+class MatchResult{
+Team winningTeam;
+Team loserTeam;
+int winByRuns;
+int winByWickets;
+}
+
