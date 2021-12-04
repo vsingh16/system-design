@@ -1,0 +1,22 @@
+Requiremnts:
+Design sports buzz website/app which will show live score of diff matches cricket, hockey, football etc.
+Read Heavy.
+Handle same type of request as multiple users are requesting same req i.e live score of a circket match.
+
+Ref Link: https://www.youtube.com/watch?v=exSwQtMxGd4
+
+client Web Site -> LB -> Product API -> Binder -> Cricket API -> No Sql/ TimeSeries Based DB <- Stadium Softwares
+                               ^                -> Football API -> No Sql/ TimeSeries Based DB <- Stadium Softwares
+                               |                -> Hockey API -> No Sql/ TimeSeries Based DB <- Stadium Softwares
+                               |                
+                         Schedulers
+                         
+                               |                                              
+                           Score Change Capture 
+                               |
+                             Topic/Queue 
+                               |
+Client Mobile -> Web Socket->Web Socket
+Apps              Handler
+                         
+                              
