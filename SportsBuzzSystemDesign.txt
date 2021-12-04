@@ -20,3 +20,17 @@ Client Mobile -> Web Socket->Web Socket
 Apps              Handler
                          
                               
+There will be softwares in stadium, which will capture score and feed to DB.
+DB Choice: Sine there are no major transaction concern and data can be unstrucured , we will go with No SQL.
+Since we need to capture events happening every moment, we may choose time series DB. eg No Flux.
+
+Client web site make htpp request which load balancer directs to product API.
+we may have 5000 request/ sec to Cricket APi.
+1)All those requests are same. Binder will bind those request and only one request will hit API , same result is return to all.
+2)We will have cache in application itself which will give us details about active over.
+3)Past over details can be fetched from Redis cache. This way we are keeping only live over/ min load in application cache.
+4)Cricker API will fetch data from DB.
+
+Mobile Apps: We can have web socket, which will push/reflect changes to client.
+Schedulers will run every 1/2 second, to kick Product API, feed data to Score Delta Engine which will calculate socre change.
+and send this info to Topic from there web sockets will listen.
