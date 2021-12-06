@@ -48,12 +48,28 @@ Order FullFillment Service: This service will be at restaurnt's end and take car
                                                  
     ------------------Order Placed, waiting for confirmation
     |                                             |
-    |<---------Order Accepted---------------------|
-customer -> Lb -> Order Service -> Queue -> Notification Service 
+    |<---------Order Accepted---------------------|      -----Accepted By Rdier-----------|
+customer -> Lb -> Order Service -> Queue -> Notification Service ----------> Delivery service----------> Rider
                                      |            |
 Order FullFillment Service<-----------            |
    |                                              |
-    ----------Order Accepted----------------------
+    ----------Order Accepted to customer----------
+    ----------Order Placed to Dlivery Service-----
+    
+1) order Service sends order details to queue.
+2) Notifcation service listen and send notification to customer i.e Order Placed, waiting for confirmation.
+3) Order FullFillment Service also consume. Now it send accept to NS.
+4) NS will notify customer order accepted.
+5) OFS will also send messsge to Delivery Service.
+6)Delivery Service will auto assign to rider.
+7) Rider accepts/rejects.
+8)Rdier pick and delivered.
+
+Data Partitioning: Customer Db can be partitioned based on pin code.
+Restuarant DB can also be partitioned based on pin code & type(chinese/veg)
+Items can be partioned on type.
+
+
                                                  
                                                  
 
