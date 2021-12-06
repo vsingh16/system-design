@@ -1,0 +1,63 @@
+Ref Link: https://medium.com/partha-pratim-sanyal/system-design-doordash-a-prepared-food-delivery-service-bf44093388e2
+
+Requirements:
+
+Customer:
+User Registeration
+Search for restaurants, items, cuisisne type
+Order Placed and Payment
+Different Order Notifications
+
+Restaurant:
+Registeration
+Add/remove/upadte items
+Accept Order
+Available/Unavailable
+
+Delivery Drivers
+Get Notification about orders assigned to them
+Accept/Reject
+Send notifcations through order delivery cycle.
+
+Zomato Admins: 
+They should able to trach complete Order life cycle and assist user.
+
+Customer -> LB -> Customer Registeration Service -> Redis -> My SQL
+               -> Search Service -> Redis -> Elastic Search Engine
+               -> Order Service -> Payment Service -> Order Service DB(RDBMS)
+
+Customer can create/update profile with Customer Registeration Service.
+Since Customer detail is structred , we can user relational db.
+Customer can do search with Search Service. Search Service is on top of Elastic search.
+Cache is also there to hold most frequent searches, item images etc.
+Order Service will take care of order creation and then further integrated with payment service.
+Order info and payment detail goes to Order Db which will be transactional one. So RDBMS.
+
+
+Restaurant -> LB -> Restaurant Registeration Service -> Redis -> My SQL
+                 -> OnBoarding Service -> Redis -> NO SQL -> Queue -> Elastic Search Engine
+                 
+Restautanrts can register themself by registeration service.
+OnBoarding Service will take care of adding/removing/updating new items.
+Sicne this info can be unstrucrted(eg : momos : half plate : 6 momos, full plate: 12, half plate butter chciken: 2 pieces), we can go with no sql.
+Information from this service will flow to Elastic Search.
+
+Order FullFillment Service: This service will be at restaurnt's end and take care of order preparation.
+
+                                                 Order Completion Workflow
+                                                 
+    ------------------Order Placed, waiting for confirmation
+    |                                             |
+    |<---------Order Accepted---------------------|
+customer -> Lb -> Order Service -> Queue -> Notification Service 
+                                     |            |
+Order FullFillment Service<-----------            |
+   |                                              |
+    ----------Order Accepted----------------------
+                                                 
+                                                 
+
+
+                 
+                 
+                 
