@@ -1,0 +1,18 @@
+class Customer{
+
+private Long id;
+private Account account;
+private int zipCode;
+
+List<SearchResult> searchByText(String text);
+boolean placeOrder(Order order);
+
+}
+
+class Account{
+private Long id;
+private String name;
+private String email;
+private int mobileNumber;
+private Address address; //covering address details
+}
