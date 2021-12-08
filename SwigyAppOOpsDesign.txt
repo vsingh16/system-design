@@ -9,6 +9,11 @@ boolean placeOrder(Order order);
 
 }
 
+class CustomerOrder{
+private Customer Customer;
+private Order Order;
+}
+
 class Account{
 private Long id;
 private String name;
@@ -16,3 +21,67 @@ private String email;
 private int mobileNumber;
 private Address address; //covering address details
 }
+
+class SearchResult{
+private Restaurant Restaurant;
+private Item item;
+}
+
+class OrderSystem{
+List<Customer> customers;
+List<Restaurant> restaurant;
+List<SearchResult> searchByText(String text);
+boolean placeOrder(Order order);
+}
+
+
+class Restaurant{
+Account account;
+boolean acceptedOrder(Order order);
+Menu updateMenu(Menu menu);
+}
+
+class Menu{
+List<MenuSection> menuSections;
+}
+
+class MenuSection{
+Long id;
+String name;
+List<Item> items;
+}
+
+class Item{
+private Long id;
+private String itemName;
+private int qty;
+}
+
+class Order{
+Long id;
+long restaurantId;
+List<Items> items;
+double total;
+OrderStatus OrderStatus;
+}
+
+enum OrderStatus{
+Accepted_By_Restaurant;
+Rejected_By_Restaurant;
+READY_FOR_DELIVERY;
+}
+
+//Observer Design Pattern
+class UpdateOrderStatus{
+Order order;
+List<Customer> customers;
+notify(){
+customers.stream.forEach(order.updateStaus);
+}
+
+register(Cunstomer){
+customers.add(Customer);
+}
+
+}
+
