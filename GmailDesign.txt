@@ -3,3 +3,28 @@ Requirements:
 2) Send/Receive email.
 
 client -> LB -> User Service -> Redis -> RDBMS
+       -> LB -> Mail Service -> Redis -> RDBMS
+                    |
+                    queue----------------------
+                                               |
+       -> LB -> Search Service -> Redis -> Elastic Search Engine
+
+1)Email Id creation.
+client send user email creation request.
+Db: id, email id, mobile number, location
+DB can be shareded based on location eg: India User DB, Australia DB
+Redis: userid, user info
+
+2)Mail Service
+client sends email.
+Email is saved in DB.
+DB: from, to, date time, content
+We can cache this info too.
+
+Redis:
+Send Cache -> email id, email content
+Receive Cache -> email id, email content
+
+3)Search:
+Elastic Search can be used.
+When email comes to email service, it further flows to queue from where it feeds into elastic search.
