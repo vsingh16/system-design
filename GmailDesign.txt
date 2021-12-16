@@ -1,0 +1,5 @@
+Requirements:
+1) User email id creation.
+2) Send/Receive email.
+
+client -> LB -> User Service -> Redis -> RDBMS
