@@ -1,0 +1,42 @@
+Ref Link: https://medium.com/@saisandeepmopuri/system-design-rate-limiter-and-data-modelling-9304b0d18250
+https://www.youtube.com/watch?v=mhUQe4BKZXs&t=942s
+
+Requirements:
+This will allow only few requests/ sec.
+
+Algorithm:
+
+1) Token Bucket:
+We can maintain below information in Redis cache.
+User 1 -> {Timestamp}, counter
+eg: we are allowing 5 requests/min for a user.
+User 1 -> {10:01 sec, 4}
+Req2: 10:20, since this is still under 1 min, and token is available
+User 1 -> {10:01 sec, 3}
+Req3: 10:40, since this is still under 1 min, and token is available
+User 1 -> {10:01 sec, 2}
+Req4: 11:05, since this is after 1 min, so we will refill token
+User 1 -> {11:05 sec, 4}
+
+2)Fixed Window Counter
+Here we can allo some requests in a timer interval
+eg: user1 -> {10-11, 8}
+user1 -> {11-12, 8}
+But there is a problem in above eg: 10:30-11 : 8 req & 11-11:30 : 8 requests
+10:30-11:30 -> 16 requests which is wrong
+
+3)Sliding Window Counter:
+user 1-> t1
+Now when 2 req come, we will insert it in queue & also delete expiring requests which is out of time range
+Now if queue size is <=allowed req, we will allow req else dont send.
+
+Only problem with this alog is that, insertion will be o(max req) & deletion can also be O(max req)
+Also we are stpring long queue info.
+
+Challenges:
+Concurrency & also in distributed architecure, requests from same user may land on diff node.
+Redis cache will solve distributed architecture problem.
+
+
+
+
