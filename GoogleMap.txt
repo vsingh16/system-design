@@ -22,7 +22,7 @@ This ETA will vary based on historic travel data, traffic updates etc.
 
 client -> LB -> Web Socket -> Location Service -> DB
                                  |
-                                  ---------Kafka(Jobs: New Route Find, Traffic Update , Users Travel time capturing)-------Map Update Service(New Route)
+                                  ---------Kafka(Spark Jobs: New Route Find, Traffic Update , Users Travel time capturing)-------Map Update Service(New Route)
                                                                             |                                                   |
                                                Traffic Update Service---------------------------------------------------    Graph Processing Service
                                                                                                                                 |
