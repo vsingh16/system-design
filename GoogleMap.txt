@@ -1,0 +1,19 @@
+Ref Link:
+https://www.youtube.com/watch?v=jk3yvVfNvds
+Requirements:
+Find route b/w source & destination
+ETA calculation
+
+1)We know there are many algorithms to find shortest distance b/w source & destination in Graph. eg Dijikstars.
+So GMAP applies same but we can't directlly apply this algo across the two points in country that will take much time & also its complicated to reprsesnt 
+whole world on a graph.
+
+2)It uses Quad Graph. Its a groah where each node has 4 children.
+We can represent one country as a parent and then further keep dividing it into smaller nodes.
+PS: Higher /Upper limit can be defined based on disucssion with Interviewer.
+
+3)Now we can calculate routes & ETA b/w various nodes in a node and cache it.
+
+4)To find route b/w two nodes(diff segments), there will be entry/exit point on each segment. 
+We will find
+
