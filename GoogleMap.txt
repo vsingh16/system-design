@@ -15,5 +15,24 @@ PS: Higher /Upper limit can be defined based on disucssion with Interviewer.
 3)Now we can calculate routes & ETA b/w various nodes in a node and cache it.
 
 4)To find route b/w two nodes(diff segments), there will be entry/exit point on each segment. 
-We will find
+We will find route b/w source& exit point + route b/w exit point of segment1 & entry point of segment2 + route b/w entry point of segment 2 & destination
 
+5)ETA will be based on some standard calculation eg: car speed at 60KM/H covers 120 km in 2 hours.
+This ETA will vary based on historic travel data, traffic updates etc.
+
+client -> LB -> Web Socket -> Location Service -> DB
+                                 |
+                                  ---------Kafka(Jobs: New Route Find, Traffic Update , Users Travel time capturing)-------Map Update Service(New Route)
+                                                                            |                                                   |
+                                               Traffic Update Service---------------------------------------------------    Graph Processing Service
+                                                                                                                                |
+                                                <--------------------------------------------------------------------------------DB
+                                Elastic Search                                                                                               
+
+Client devices are connected with web socket to location service.
+This is continuously capturing current locations. This is getting stored in DB.
+Also analytics is happening over it, capturing live traffic & travel time etc.
+This info is updating Graph Processing service.
+Data is getting feeded in Elatsic serach from Graph Service , and user search is supported.
+
+PS: GMAP uses its own Bigtable(No SQL)
