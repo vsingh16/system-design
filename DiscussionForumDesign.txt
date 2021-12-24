@@ -10,7 +10,7 @@ Requirements:
 client -> LB -> Account Service -> Redis -> RDBMS
           LB -> Forum Service -> Redis -> RDBMS
           
-PS: Text can be save in S3 as well.          
+Ref: https://laracasts.com/discuss/channels/general-discussion/thoughts-on-db-schema-for-a-discussion-question-answer-forum?page=1
           
 1)Account service : user profile creation
 Table : id,name, email, mobile
