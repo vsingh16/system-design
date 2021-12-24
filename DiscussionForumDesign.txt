@@ -8,7 +8,9 @@ Requirements:
 7)Badges & Reuptation
 
 client -> LB -> Account Service -> Redis -> RDBMS
-          LB -> Forum Service -> Redis -> NOSQL
+          LB -> Forum Service -> Redis -> RDBMS
+          
+PS: Text can be save in S3 as well.          
           
 1)Account service : user profile creation
 Table : id,name, email, mobile
