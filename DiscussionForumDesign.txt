@@ -1,0 +1,74 @@
+Requirements:
+1)User should be able to create account.
+2)Post Questions
+3)Post Ans.
+4)Add Comment to ques/ans
+5)Tag Question
+6)Upvote/Downvote
+7)Badges & Reuptation
+
+client -> LB -> Account Service -> Redis -> RDBMS
+          LB -> Forum Service -> Redis -> NOSQL
+          
+1)Account service : user profile creation
+Table : id,name, email, mobile
+
+2)Froum Service
+API:
+/ask/question
+/reply/question
+/comment/question
+/comment/ans
+/upvote/quest
+/upvote/ans
+/downvote/quest
+/downvote/ans
+
+
+Below Schema
+Member:{
+id,
+account id,
+List<Questions>
+List<Ans>
+List<Badges>
+}
+
+Badge:{
+id,
+name,
+value
+}
+
+Questions:{
+id,
+title,
+content,
+List<Tag>
+postedByUser,
+upvote,
+downvote,
+List<Ans>
+List<Comment>
+dateTime
+}
+
+Ans:{
+id,
+content,
+postedByUser,
+upvote,
+downvote,
+List<Comment>,
+dateTime
+}
+
+Comment:{
+id,
+text,
+dateTime,
+postedByUser,
+upVote,
+downVote
+}
+
